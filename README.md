@@ -1,7 +1,7 @@
 # TFG-Jorge-Sofia
 
-###Para poder hacer peticiones con distintos puertos en los servicios. 
-####Opción 1: Configuración global
+### Para poder hacer peticiones con distintos puertos en los servicios. 
+#### Opción 1: Configuración global
 Puedes permitir CORS globalmente en tu aplicación configurando un CorsMapping en tu clase de configuración.
 
 java
@@ -23,7 +23,5 @@ public class WebConfig implements WebMvcConfigurer {
     }
 }
 
-####Opción 2, poner esta cabecera en cada método del controlador de la API (en backend//spring)
+#### Opción 2, poner esta cabecera en cada método del controlador de la API (en backend//spring)
 @CrossOrigin(origins = "http://localhost:4200")
-
-CHOSEEEE nos has abandorado
