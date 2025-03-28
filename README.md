@@ -25,3 +25,6 @@ public class WebConfig implements WebMvcConfigurer {
 
 #### Opción 2, poner esta cabecera en cada método del controlador de la API (en backend//spring)
 @CrossOrigin(origins = "http://localhost:4200")
+
+## Veremos a ver si podemos publicar nuestra web con esto
+https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/local-management/create-local-tunnel/
