@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//investigar si nos sale rentable hacer una clase de configuración o si podemos buscar y editar la que tenga SProng por defecto :D
+//investigar si nos sale rentable hacer una clase de configuración o si podemos buscar y editar la que tenga SPring por defecto :D
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
     @Override
@@ -26,5 +26,8 @@ public class WebConfig implements WebMvcConfigurer {
 #### Opción 2, poner esta cabecera en cada método del controlador de la API (en backend//spring)
 @CrossOrigin(origins = "http://localhost:4200")
 
-## Veremos a ver si podemos publicar nuestra web con esto
+### Veremos a ver si podemos publicar nuestra web con esto
 https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/do-more-with-tunnels/local-management/create-local-tunnel/
+
+### Redirigir la pagina a otra pagina web
+window.location.href = path;
