@@ -1,8 +1,0 @@
-Guía de rutas de la API:
-
-Ruta base: http://localhost:8083
-
---Usuarios--
-  -Lista de todos los usuarios: /usuarios
-  -Usuario por dni: /usuarios/dni/123456789L
-  -Usuario por email: /usuarios/email/mail@ejemplo.com
