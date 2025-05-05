@@ -11,10 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@DynamoDBTable(tableName = "Usuariosv2")
+@DynamoDBTable(tableName = "Usuariosv3")
 public class Usuario {
 	
-	private String id;
 	private String nombre;
 	private String apellidos;
 	private String calle;
@@ -23,15 +22,6 @@ public class Usuario {
     private String contrasena;
     private String telefono;
     private boolean esAdmin;
-    
-    @DynamoDBHashKey(attributeName = "id")
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @DynamoDBAttribute(attributeName = "nombre")
     public String getNombre() {
@@ -69,7 +59,7 @@ public class Usuario {
 		this.calle = calle;
 	}
 	
-	@DynamoDBAttribute(attributeName = "DNI")
+	@DynamoDBHashKey(attributeName = "DNI")
 	public String getDNI() {
 		return DNI;
 	}
