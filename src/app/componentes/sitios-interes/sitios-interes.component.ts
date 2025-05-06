@@ -25,7 +25,7 @@ export class SitiosInteresComponent{
     )
   }
   /**
-  * esto es una prueba para git
+  * esto es una prueba para git desde angular
   */
   irAtextoMarcador(nombreLugar: string) {
     let contenido = document.getElementById(nombreLugar);
