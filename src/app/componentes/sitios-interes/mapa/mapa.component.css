@@ -1,0 +1,19 @@
+.mapa-contenedor{
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 0;
+  bottom: 0;
+  margin: 30px;
+}
+  
+.mapa-frame {
+  border: 2px solid black;
+  height: 100%;
+}
+  
+#mapa {
+  height: 100%;
+}

@@ -1,0 +1,27 @@
+<h1>Inicio de sesión</h1>
+
+<section>
+    <form [formGroup]="usuario" (ngSubmit)="logIn(usuario)">
+        <section>
+          <mat-form-field>
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput type="email" formControlName="correo" required autocomplete="email">
+            <mat-error *ngIf="usuario.get('correo')?.hasError('required')">Tienes que introducir un valor</mat-error>
+            <mat-error *ngIf="usuario.get('correo')?.hasError('email')">No has introducido un email</mat-error>
+          </mat-form-field>
+        </section>
+      
+        <section class="formGroup">
+          <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="contraseña" [type]="hide ? 'password' : 'text'" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="usuario.get('contraseña')?.hasError('required')">Tienes que introducir un valor</mat-error>
+          </mat-form-field>
+        </section>
+      
+        <button type="submit" [disabled]="usuario.invalid">Log In</button>
+        <a routerLink="/registrarse">¿No tienes cuenta? Regístrate aquí</a>
+      </form>
+    
+</section>

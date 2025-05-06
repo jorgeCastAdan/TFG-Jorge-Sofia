@@ -1,0 +1,27 @@
+.contenido{
+    position: absolute;
+    top: 60%;
+    width: 100%;
+}
+mat-card{
+    width: 100%;
+    margin-bottom: 5%;
+}
+mat-icon{
+    margin-left: 5px;
+}
+button{
+    display: flex;
+    align-items: center;
+}
+
+.resaltadoCard {
+    animation: resaltar 2s ease;
+    outline: 3px solid #000000;
+    background-color: #b3b1b1;
+}
+@keyframes resaltar {
+    0% { outline-color: #000000; background-color: #b3b1b1; }
+    50% { outline-color: #535353; background-color: #d6d5d4; }
+    100% { outline-color: transparent; background-color: transparent; }
+}

@@ -1,0 +1,15 @@
+mat-drawer-container {
+  height: 93%;
+}
+.menuItem{
+  width: 100%;
+}
+.contenido{
+  height: 95%;
+}
+.contenido > *{
+  height: 95%;
+}
+.menuItem{
+  height: 60px;
+}

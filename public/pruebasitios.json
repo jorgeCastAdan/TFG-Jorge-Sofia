@@ -1,0 +1,112 @@
+[
+    {
+      "id": 1,
+      "lugar": "El Retiro",
+      "lon": -3.683055,
+      "lat": 40.414503,
+      "informacion": "Parque más importante de Madrid, lleno de fuentes, plazas, espectáculos de marionetas, músicos, adivinos y mucho más.",
+      "img": "",
+      "direccion": "Plaza de la Independencia, 7, 28001 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.7
+    },
+    {
+      "id": 2,
+      "lugar": "Puerta del Sol",
+      "lon": -3.703798,
+      "lat": 40.416968,
+      "informacion": "Una de las plazas más famosas de Madrid: el Oso y el Madroño, el Kilómetro Cero y el famoso reloj de las campanadas se encuentran aquí.",
+      "img": "",
+      "direccion": "Puerta del Sol, 28013 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.6
+    },
+    {
+      "id": 3,
+      "lugar": "Plaza Mayor",
+      "lon": -3.707381,
+      "lat": 40.415408,
+      "informacion": "Situada en el corazón de Madrid, a pocos metros de la Puerta del Sol.",
+      "img": "",
+      "direccion": "Plaza Mayor, 28012 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.5
+    },
+    {
+      "id": 4,
+      "lugar": "Palacio Real",
+      "lon": -3.713497,
+      "lat": 40.418418,
+      "informacion": "La residencia oficial de la Familia Real Española y fue construido en el siglo XVIII.",
+      "img": "",
+      "direccion": "Calle de Bailén, s/n, 28071 Madrid, España",
+      "telefono": "+34 915 54 87 00",
+      "valoracion": 4.8
+    },
+    {
+      "id": 5,
+      "lugar": "Museo del Prado",
+      "lon": -3.692307,
+      "lat": 40.413717,
+      "informacion": "El museo más importante de Madrid por albergar obras de Goya, Velázquez, El Bosco y otros pintores reconocidos.",
+      "img": "",
+      "direccion": "Calle de Felipe IV, s/n, 28014 Madrid, España",
+      "telefono": "+34 913 30 28 00",
+      "valoracion": 4.9
+    },
+    {
+      "id": 6,
+      "lugar": "Templo de Debod",
+      "lon": -3.717102,
+      "lat": 40.42418,
+      "informacion": "Un antiguo templo egipcio que fue donado a España y reconstruido en Madrid.",
+      "img": "",
+      "direccion": "Calle Ferraz, 28008 Madrid, España",
+      "telefono": "+34 915 54 87 00",
+      "valoracion": 4.4
+    },
+    {
+      "id": 7,
+      "lugar": "Gran Vía",
+      "lon": -3.705997,
+      "lat": 40.420308,
+      "informacion": "La calle más conocida y transitada de Madrid.",
+      "img": "",
+      "direccion": "Gran Vía, 28013 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.7
+    },
+    {
+      "id": 8,
+      "lugar": "Plaza de Cibeles",
+      "lon": -3.693064,
+      "lat": 40.419312,
+      "informacion": "Una de las plazas más famosas de Madrid.",
+      "img": "",
+      "direccion": "Plaza de Cibeles, 28014 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.6
+    },
+    {
+      "id": 9,
+      "lugar": "Plaza de España",
+      "lon": -3.712478,
+      "lat": 40.423314,
+      "informacion": "Localizada entre la Gran Vía y la Calle Princesa, es uno de los principales núcleos de Madrid.",
+      "img": "",
+      "direccion": "Plaza de España, 28008 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.5
+    },
+    {
+      "id": 10,
+      "lugar": "Casa de Campo",
+      "lon": -3.7609344,
+      "lat": 40.4263555,
+      "informacion": "El principal pulmón verde de Madrid.",
+      "img": "",
+      "direccion": "Casa de Campo, 28011 Madrid, España",
+      "telefono": "+34 915 30 00 41",
+      "valoracion": 4.8
+    }
+]

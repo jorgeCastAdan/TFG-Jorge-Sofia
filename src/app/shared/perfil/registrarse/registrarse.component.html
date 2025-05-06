@@ -1,0 +1,66 @@
+<h1>Registrarse</h1>
+
+<section>
+  <form [formGroup]="usuario" (ngSubmit)="registrarse(usuario)">
+    <section>
+      <mat-form-field>
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput type="email" formControlName="correo" required autocomplete="email">
+        <mat-error *ngIf="usuario.get('correo')?.hasError('required')">Tienes que introducir un valor</mat-error>
+        <mat-error *ngIf="usuario.get('correo')?.hasError('email')">No has introducido un email</mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="formGroup">
+      <mat-form-field>
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="contraseña" [type]="hide ? 'password' : 'text'" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <mat-error *ngIf="usuario.get('contraseña')?.hasError('required')">Tienes que introducir un valor</mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="formGroup">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" required>
+        <mat-error *ngIf="usuario.get('nombre')?.hasError('required')">Tienes que introducir un valor</mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="formGroup">
+      <mat-form-field>
+        <mat-label>Apellidos</mat-label>
+        <input matInput formControlName="apellidos" required>
+        <mat-error *ngIf="usuario.get('apellidos')?.hasError('required')">Tienes que introducir un valor</mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="formGroup">
+      <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input matInput formControlName="telefono" required>
+        <mat-error *ngIf="usuario.get('telefono')?.hasError('required')">Tienes que introducir un valor</mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="formGroup">
+      <mat-form-field>
+        <mat-label>DNI</mat-label>
+        <input matInput formControlName="dni" required>
+        <mat-error *ngIf="usuario.get('dni')?.hasError('required')">Tienes que introducir un valor</mat-error>
+      </mat-form-field>
+    </section>
+
+    <section class="formGroup">
+      <mat-form-field>
+        <mat-label>Dirección</mat-label>
+        <input matInput formControlName="direccion" required>
+        <mat-error *ngIf="usuario.get('direccion')?.hasError('required')">Tienes que introducir un valor</mat-error>
+      </mat-form-field>
+    </section>
+
+    <button type="submit" [disabled]="usuario.invalid">Log In</button>
+    <a routerLink="/login">¿Ya tiene cuenta? Inicie sesión aquí</a>
+  </form>
+</section>

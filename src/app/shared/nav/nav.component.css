@@ -1,0 +1,20 @@
+.sesion{
+    margin-left: auto;
+}
+mat-toolbar {
+    background-color: #d89595;
+    color: white;
+    height: 7%;
+    display: flex;
+    align-items: center;
+
+}
+button{
+    background-color: white;
+}
+label{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: bold;
+}

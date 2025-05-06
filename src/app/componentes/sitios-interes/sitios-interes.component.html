@@ -1,0 +1,30 @@
+<app-mapa [marcadores]="data" (pulsarMarcador)="irAtextoMarcador($event)"></app-mapa>
+<div class="contenido">
+    <ng-container *ngFor="let marcador of data">
+        <mat-card id="{{marcador.lugar}}">
+            <mat-card-header>
+                <mat-card-title>{{marcador.lugar}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{marcador.img}}">
+            <mat-card-content>
+                <p>
+                    {{marcador.informacion}}
+                </p>   
+                <div>
+                    Direccion:  {{marcador.direccion}} //
+                    Telefono: {{marcador.telefono}} //
+                    Valoracion: {{marcador.valoracion}}
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="volverMapa()">
+                    Volver al mapa
+                    <mat-icon>map</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </ng-container>
+</div>
+
+
+

@@ -1,0 +1,27 @@
+[
+    {
+        "id":3,
+        "icon":"groups",
+        "name":"Actividades",
+        "ruta":"actividades"
+    },
+    {
+        "id":2,
+        "icon":"map",
+        "name":"Lugares de interés",
+        "ruta":"lugares-interes"
+    },
+    {
+        "id":1,
+        "icon":"home",
+        "name":"Inicio",
+        "ruta":""
+    },
+    {
+        "id":4,
+        "icon":"settings",
+        "name":"Gestión de actividades",
+        "ruta":"gestion",
+        "admin":true
+    }
+]

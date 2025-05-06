@@ -1,0 +1,20 @@
+<app-nav (sidenav)="abrirMenu()" (abrirPerfil)="cerrarMenu()"></app-nav>
+
+<mat-drawer-container autosize>
+    <mat-drawer #drawer mode="over">
+      <div>
+        <ng-container *ngFor="let item of data">
+          @if(!item.admin){
+            <button mat-button class = "menuItem" (click)="cambiarRuta(item.ruta)">
+              <mat-icon>{{item.icon}}</mat-icon>
+              {{item.name}}
+            </button>
+          }
+
+        </ng-container>
+      </div>
+    </mat-drawer>
+    <div class="contenido">
+      <router-outlet></router-outlet>
+    </div>
+</mat-drawer-container>
