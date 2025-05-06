@@ -24,7 +24,9 @@ export class SitiosInteresComponent{
       this.data = sitios
     )
   }
-
+  /**
+  *
+  */
   irAtextoMarcador(nombreLugar: string) {
     let contenido = document.getElementById(nombreLugar);
     contenido?.scrollIntoView({behavior:'smooth', block:'center'})
