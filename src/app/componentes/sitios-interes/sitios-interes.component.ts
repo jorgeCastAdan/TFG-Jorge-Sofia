@@ -44,7 +44,7 @@ export class SitiosInteresComponent{
    * el scroll aparece solo en el drawer y no anivel de la pagina entera
    */
   volverMapa(){
-    let contenido = document.querySelector('mat-drawer-content');
+    let contenido = document.getElementById('contenidoWeb');
     contenido?.scrollTo({top:0, behavior:'smooth'});
   }
 }
