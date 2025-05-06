@@ -25,7 +25,7 @@ export class SitiosInteresComponent{
     )
   }
   /**
-  *
+  * esto es una prueba para git
   */
   irAtextoMarcador(nombreLugar: string) {
     let contenido = document.getElementById(nombreLugar);
