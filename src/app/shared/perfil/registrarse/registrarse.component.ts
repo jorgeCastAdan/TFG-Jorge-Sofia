@@ -61,7 +61,7 @@ export class RegistrarseComponent {
           telefono:form.value.telefono,
         }
 
-        this.usuarioService.postUsuario(us)
+        this.usuarioService.postUsuario(us).subscribe((us)=>console.log(us))
         this.auth.setToken(us.email!)
         window.location.href = '/'
       }

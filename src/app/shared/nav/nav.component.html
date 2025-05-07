@@ -3,9 +3,21 @@
       <mat-icon>menu</mat-icon>
     </button>
     <label>Santanica</label>
-    <button mat-icon-button aria-label="Iniciar sesión" class="sesion" (click)="perfil()">
-        <mat-icon>{{icono}}</mat-icon>
-    </button>
+    @if(!autorizado){
+      <button mat-icon-button aria-label="Iniciar sesión" class="sesion" (click)="perfil()">
+        <mat-icon>person_off</mat-icon>
+      </button>
+    }
+    @if(autorizado){
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Iniciar sesión" class="sesion">
+        <mat-icon>person</mat-icon>
+      </button>
+    }
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="editar()">Editar perfil</button>
+      <button mat-menu-item (click)="cerrar()">Cerrar sesión</button>
+    </mat-menu>
 </mat-toolbar>
+
 
 

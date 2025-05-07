@@ -9,7 +9,7 @@ import { UsuarioService } from '../../../core/services/usuario.service';
 import {Usuario} from '../../../core/tipados'
 
 type UsuarioForm = FormGroup<{
-  correo: FormControl<string | null>;
+  email: FormControl<string | null>;
   nombre: FormControl<string | null>;
   apellidos: FormControl<string | null>;
   telefono: FormControl<string | null>;
@@ -28,20 +28,19 @@ type UsuarioForm = FormGroup<{
 })
 export class EditarComponent {
 
-  usuario!:Usuario;
 
   constructor(private auth : AuthService, private fb:FormBuilder, private usuarioService : UsuarioService){
     usuarioService.getUsuario(auth.getToken()).subscribe(
       (usuario) => {
-        this.usuario = usuario
+        console.log(usuario)
         this.usuarioForm = this.fb.group({
-          contraseña: [`${this.usuario.contrasena}`, Validators.required],
+          email: [`${usuario.email}`, [Validators.required, Validators.email]],
+          contraseña: [`${usuario.contrasena}`, Validators.required],
           apellidos: [`${usuario.apellidos}`, Validators.required],
           nombre: [`${usuario.nombre}`, Validators.required],
           direccion: [`${usuario.calle}`, Validators.required],
           dni: [`${usuario.dni}`, Validators.required],
-          telefono: [`${usuario.telefono}`, Validators.required],
-          correo: [`${usuario.email}`, [Validators.required, Validators.email]]
+          telefono: [`${usuario.telefono}`, Validators.required]
         })
       }
     )
@@ -52,6 +51,7 @@ export class EditarComponent {
 
   guardar(form: UsuarioForm) {
     let usuario = {
+      email:form.value.email,
       nombre : form.value.nombre,
       apellidos:form.value.apellidos,
       calle:form.value.direccion,

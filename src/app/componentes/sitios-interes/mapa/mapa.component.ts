@@ -3,9 +3,9 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID, Input, Output, EventEmit
 import { LugarInteres } from '../../../core/tipados';
 
 const centradoInicial = {
-  latitud: 40.414503,
-  longitud: -3.683055,
-  zoom:14 
+  latitud: 42.37348279273548,
+  longitud: -6.2562092320290486,
+  zoom:12
 };
 
 @Component({
@@ -45,8 +45,17 @@ export class MapaComponent  implements AfterViewInit{
   }
 
   inicializarMapa(L: any) {
-    if (this.mapa) {
-      this.mapa.remove(); // Limpia el mapa anterior
+    const mapContainer = L.DomUtil.get('mapa');
+
+    if (mapContainer && mapContainer['_leaflet_id']) {
+      mapContainer.remove();
+
+      const newContainer = document.createElement('div');
+      newContainer.id = 'mapa';
+      newContainer.style.height = '100%';
+      
+      const parent = mapContainer.parentNode;
+      if (parent) parent.appendChild(newContainer);
     }
 
     this.mapa = L.map('mapa').setView(
@@ -59,13 +68,15 @@ export class MapaComponent  implements AfterViewInit{
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(this.mapa);
 
-    this.marcadores.forEach(marcador => {
-      L.marker([marcador.lat, marcador.lon])
-      .addTo(this.mapa)
-      .on('click', () => {
-        this.pulsarMarcador.emit(marcador.lugar)
+    if(this.marcadores !== undefined){
+      this.marcadores.forEach(marcador => {
+        L.marker([marcador.latitud, marcador.longitud])
+        .addTo(this.mapa)
+        .on('click', () => {
+          this.pulsarMarcador.emit(marcador.lugar)
+        });
       });
-    });
+    }
   }
 }
 

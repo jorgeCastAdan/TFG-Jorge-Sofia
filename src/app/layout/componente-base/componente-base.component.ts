@@ -6,6 +6,8 @@ import { NavComponent } from "../../shared/nav/nav.component";
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuService } from '../../core/services/menu-service.service';
 import { NgFor, NgIf } from '@angular/common';
+import { AuthService } from '../../core/services/auth.service';
+import { UsuarioService } from '../../core/services/usuario.service';
 
 @Component({
   selector: 'app-componente-base',
@@ -20,12 +22,14 @@ export class ComponenteBaseComponent {
 
   router = inject(Router)
 
-  cargando:boolean = true;
+  admin:boolean = false;
 
-  constructor(private servicioMenu: MenuService){
+  constructor(private servicioMenu: MenuService, private auth: AuthService, private usuario: UsuarioService){
     this.servicioMenu.recuperarMenu().subscribe( items => this.data = items);
-
-
+    let token = this.auth.getToken()
+    if(token){
+      this.usuario.getUsuario(token).subscribe((us)=>this.admin = us.esAdmin)
+    }
   }
 
   abrirMenu() {

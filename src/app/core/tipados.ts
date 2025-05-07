@@ -20,8 +20,8 @@ export type MenuItem = {
 export type LugarInteres =  {
   id: number
   lugar: string
-  lon: number
-  lat: number
+  longitud: number
+  latitud: number
   informacion: string
   img: string
   direccion: string
