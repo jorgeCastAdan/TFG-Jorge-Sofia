@@ -5,12 +5,12 @@ import { MatIconModule } from '@angular/material/icon'
 import { NavComponent } from "../../shared/nav/nav.component";
 import { Router, RouterOutlet } from '@angular/router';
 import { MenuService } from '../../core/services/menu-service.service';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-componente-base',
   standalone:true,
-  imports: [NavComponent, MatSidenavModule, RouterOutlet, NgFor, MatButtonModule, MatIconModule],
+  imports: [NavComponent, MatSidenavModule, RouterOutlet, NgFor, MatButtonModule, MatIconModule, NgIf],
   templateUrl: './componente-base.component.html',
   styleUrl: './componente-base.component.css'
 })
@@ -20,8 +20,12 @@ export class ComponenteBaseComponent {
 
   router = inject(Router)
 
+  cargando:boolean = true;
+
   constructor(private servicioMenu: MenuService){
     this.servicioMenu.recuperarMenu().subscribe( items => this.data = items);
+
+
   }
 
   abrirMenu() {

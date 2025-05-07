@@ -3,6 +3,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,6 +14,12 @@ import { Router } from '@angular/router';
 })
 export class NavComponent {
 
+  auth =  inject(AuthService);
+
+  autorizado:boolean = false;
+
+  icono:string = 'person_off';
+
   private router = inject(Router)
 
   @Output() sidenav = new EventEmitter();
@@ -21,6 +28,11 @@ export class NavComponent {
 
   constructor()
   {
+    if(this.auth.getToken()){
+      this.icono = 'person';
+      this.autorizado = true;
+    }
+
   }
 
   abrirmenu() {
@@ -28,7 +40,13 @@ export class NavComponent {
   }
 
   perfil(){
-    this.router.navigate(['editar-perfil'])
+    if(this.autorizado){
+      this.router.navigate(['editar-perfil'])
+    }
+    else{
+      this.router.navigate(['login'])
+    }
+    
     this.abrirPerfil.emit()
   }
 }

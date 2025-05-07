@@ -1,15 +1,6 @@
 import { Routes } from '@angular/router';
 import { registradoGuard } from './core/guardias/registrado.guard';
 import { ComponenteBaseComponent } from './layout/componente-base/componente-base.component';
-import { ActividadesComponent } from './componentes/actividades/actividades.component';
-import { InicioComponent } from './componentes/inicio/inicio.component';
-import { SitiosInteresComponent } from './componentes/sitios-interes/sitios-interes.component';
-import { GestionComponent } from './componentes/gestion/gestion.component';
-import { AsociadosComponent } from './componentes/gestion/asociados/asociados.component';
-import { EventosComponent } from './componentes/gestion/eventos/eventos.component';
-import { LoginComponent } from './shared/perfil/login/login.component';
-import { RegistrarseComponent } from './shared/perfil/registrarse/registrarse.component';
-import { EditarComponent } from './shared/perfil/editar/editar.component';
 
 export const routes: Routes = [
     {
@@ -18,44 +9,44 @@ export const routes: Routes = [
         children: [
             {
                 path:'',
-                component:InicioComponent
+                loadComponent: () => import('./componentes/inicio/inicio.component').then(m => m.InicioComponent)
             },
             {
                 path: 'actividades',
                 canActivate:[registradoGuard],
-                component: ActividadesComponent
+                loadComponent: () => import('./componentes/actividades/actividades.component').then(m => m.ActividadesComponent)
             },
             {
                 path:'lugares-interes',
-                component: SitiosInteresComponent
+                loadComponent: () => import('./componentes/sitios-interes/sitios-interes.component').then(m => m.SitiosInteresComponent)
             },
             {
                 path: 'gestion',
-                component: GestionComponent,
+                loadComponent: () => import('./componentes/gestion/gestion.component').then(m => m.GestionComponent),
                 children: [
                     {
                         path:'asociados',
-                        component: AsociadosComponent
+                        loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
                     },
                     {
                         path: 'eventos',
-                        component: EventosComponent
+                        loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
                     }
                 ]
             },
             {
                 path: 'login',
-                component: LoginComponent,
+                loadComponent: () => import('./shared/perfil/login/login.component').then(m => m.LoginComponent)
 
             },
             {
                 path: 'registrarse',
-                component: RegistrarseComponent
+                loadComponent: () => import('./shared/perfil/registrarse/registrarse.component').then(m => m.RegistrarseComponent)
             },
             {
                 path: 'editar-perfil',
                 canActivate: [registradoGuard],
-                component: EditarComponent
+                loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
             }
         ]
     },

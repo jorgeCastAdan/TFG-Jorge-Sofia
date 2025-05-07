@@ -5,6 +5,7 @@ import { LugarInteres } from '../../core/tipados';
 import { NgFor } from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon'
+import { SitiosInteresService } from '../../core/services/sitios-interes.service';
 
 @Component({
   selector: 'app-sitios-interes',
@@ -18,9 +19,9 @@ export class SitiosInteresComponent{
 
   data!: LugarInteres[];
 
-  constructor(private http: MenuService)
+  constructor(private http: SitiosInteresService)
   {
-    this.http.recuperarSitiosInteres().subscribe( sitios => 
+    this.http.getAllSitios().subscribe( sitios => 
       this.data = sitios
     )
   }

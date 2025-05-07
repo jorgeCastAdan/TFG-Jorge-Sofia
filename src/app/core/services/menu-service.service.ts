@@ -15,8 +15,4 @@ export class MenuService {
   recuperarMenu(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.path);
   }
-
-  recuperarSitiosInteres(): Observable<LugarInteres[]>{
-    return this.http.get<LugarInteres[]>('pruebasitios.json');
-  }
 }

@@ -19,9 +19,19 @@
             <mat-error *ngIf="usuario.get('contraseña')?.hasError('required')">Tienes que introducir un valor</mat-error>
           </mat-form-field>
         </section>
-      
-        <button type="submit" [disabled]="usuario.invalid">Log In</button>
-        <a routerLink="/registrarse">¿No tienes cuenta? Regístrate aquí</a>
+
+        <div class="login">
+          <a routerLink="/registrarse">¿No tienes cuenta? Regístrate aquí</a>
+          <button type="submit" [disabled]="usuario.invalid">Log In</button>
+          <div *ngIf="usuarioIncorrecto" class="errorPersonalizado">
+            El usuario no existe
+          </div>
+          <div *ngIf="contrasenaIncorrecta" class="errorPersonalizado">
+            La contraseña no coincide
+          </div>
+        </div>
+
+        
       </form>
     
 </section>

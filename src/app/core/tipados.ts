@@ -3,9 +3,10 @@ export type Usuario = {
     apellidos:string,
     telefono:string,
     dni:string,
-    correo:string,
-    direccion:string,
-    contrasena:string
+    email:string,
+    calle:string,
+    contrasena:string,
+    esAdmin:boolean
 }
 
 export type MenuItem = {

@@ -1,13 +1,19 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
-export const registradoGuard: CanActivateFn = (route, state) => {
-  let autentificado = false;
-  const router = inject(Router);
+export const registradoGuard: CanActivateFn = async (
+  route: ActivatedRouteSnapshot,
+  _: RouterStateSnapshot
+): Promise<boolean | UrlTree> => {
   
-  if(autentificado){
+  const auth = inject(AuthService)
+  const router = inject(Router);
+  const token = await auth.getToken()
+  
+  if(token){
     return true;
   }
   
-  return router.navigate(['/login']);
-};
+  return router.parseUrl('/login')
+}

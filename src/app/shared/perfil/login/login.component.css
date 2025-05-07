@@ -11,9 +11,10 @@ form{
     flex-direction: column;
 }
 button{
-    margin-left: 42.5%;
     width: 15%;
     height: 50px;
+    background-color: #d89595;
+    border-color: #d17777;
 }
 mat-form-field{
     width: 50%;
@@ -21,4 +22,14 @@ mat-form-field{
 a{
     width: 13%;
     margin-left: 25%;
+}
+.login{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5%;
+}
+.errorPersonalizado{
+    color: rgb(218, 58, 58);
+    font-size: small;
 }

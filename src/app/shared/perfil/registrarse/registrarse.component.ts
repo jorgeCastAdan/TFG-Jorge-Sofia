@@ -5,8 +5,10 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { UsuarioService } from '../../../core/services/usuario.service';
+import { AuthService } from '../../../core/services/auth.service';
 
-type Usuario = FormGroup<{
+type UsuarioForm = FormGroup<{
   correo: FormControl<string | null>;
   nombre: FormControl<string | null>;
   apellidos: FormControl<string | null>;
@@ -25,10 +27,11 @@ type Usuario = FormGroup<{
 })
 export class RegistrarseComponent {
 
-  usuario! : Usuario;
+ usuario! : UsuarioForm;
  hide: boolean = true;
+ usuarioExistente = false;
 
-  constructor(private fb: FormBuilder){
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private auth: AuthService){
     this.usuario = this.fb.group({
       contraseña: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -40,7 +43,28 @@ export class RegistrarseComponent {
     })
   }
 
-  registrarse(arg0: Usuario) {
+  registrarse(form: UsuarioForm) {
+    if(this.usuarioExistente){
+      this.usuarioExistente = !this.usuarioExistente
+    }
 
+    this.usuarioService.getUsuario(form.value.correo!).subscribe({
+      next: () => this.usuarioExistente = true,
+      error: () => {
+        let us = {
+          dni:form.value.dni,
+          nombre:form.value.nombre,
+          apellidos:form.value.apellidos,
+          calle:form.value.direccion,
+          email:form.value.correo,
+          contrasena:form.value.contraseña,
+          telefono:form.value.telefono,
+        }
+
+        this.usuarioService.postUsuario(us)
+        this.auth.setToken(us.email!)
+        window.location.href = '/'
+      }
+    })
   }
 }

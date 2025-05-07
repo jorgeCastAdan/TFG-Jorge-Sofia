@@ -26,6 +26,7 @@
     "express": "^4.18.2",
     "leaflet": "^1.9.4",
     "ngx-bootstrap": "^19.0.2",
+    "ngx-cookie-service": "^19.1.2",
     "ngx-leaflet": "^0.0.16",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
