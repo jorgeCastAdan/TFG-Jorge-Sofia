@@ -1,0 +1,20 @@
+Guía de rutas de la API:
+
+Ruta base: http://localhost:8083
+
+--Usuarios--
+  -Lista de todos los usuarios: /usuarios
+  -Usuario por dni: /usuarios/dni/123456789L
+  -Usuario por email: /usuarios/emai/jogito@email.com
+
+--Actividades--
+  -Lista de todas las actividades: /actividades
+  -Actividades por código: /actividades/id/1
+
+--Informacion--
+  -Lista de toda la información: /informacion
+  -Información por código: /informacion/id/Texto_4
+
+--Sitios de interes--
+  -Lista de todos los sitios: /sitios
+  -Sitios por código: /sitios/id/1
