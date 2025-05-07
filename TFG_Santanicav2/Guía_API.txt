@@ -1,6 +1,6 @@
 Guía de rutas de la API:
 
-Ruta base: http://localhost:8083
+Ruta base: http://localhost:8083/santanica
 
 --Usuarios--
   -Lista de todos los usuarios: /usuarios
