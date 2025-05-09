@@ -4,7 +4,7 @@
     <mat-drawer #drawer mode="over">
       <div>
         <ng-container *ngFor="let item of data">
-          @if(!item.admin){
+          @if(!item.esAdmin){
             <button mat-button class = "menuItem" (click)="cambiarRuta(item.ruta)">
               <mat-icon>{{item.icon}}</mat-icon>
               {{item.name}}

@@ -28,3 +28,10 @@ export type LugarInteres =  {
   telefono: string
   valoracion: number
 }
+
+export type Info = {
+  codigo:string,
+  descripcion:string,
+  img:string,
+  titulo:string
+}
