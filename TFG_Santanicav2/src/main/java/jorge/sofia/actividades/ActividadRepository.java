@@ -9,6 +9,5 @@ import clases.Actividad;
 public interface ActividadRepository extends CrudRepository<Actividad, String>{
 	
 	Actividad findByCodigo(String codigo);
-	Actividad findByTitulo(String titulo);
 	
 }

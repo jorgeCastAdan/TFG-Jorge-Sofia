@@ -4,16 +4,22 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import clases.Usuario;
 
 @RestController
-@RequestMapping("/usuarios")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/santanica/usuarios")
 public class UsuarioController {
 	private final Logger LOG = LoggerFactory.getLogger(UsuarioController.class);
 	private final UsuarioService servicio;
@@ -35,19 +41,6 @@ public class UsuarioController {
 		}
 		
 	}
-	@GetMapping("/email/{email}")
-	public ResponseEntity<Usuario> getUsuId(@PathVariable String email){
-		LOG.info("Se ha recibido el id {" + email + "}");
-		Usuario buscado = servicio.buscarPorEmail(email);
-		LOG.info("Se ha solicitado un usuario por su id");
-		if(buscado != null) {
-			LOG.info("Se ha encontrado el usuario, devolviendolo...");
-			return ResponseEntity.ok(buscado);
-		} else {
-			LOG.warn("No se ha encontrado el usuario");
-			return ResponseEntity.notFound().build();
-		}
-	}
 	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getTodos(){
@@ -60,5 +53,26 @@ public class UsuarioController {
 			return ResponseEntity.ok(usuarios);
 		}
 	}
-
+	
+	@PostMapping("/nuevo")
+	public ResponseEntity<Usuario> guardarUsuario(@RequestBody Usuario usuNuevo){
+		LOG.info("Se va a guardar un usuario");
+		Usuario guardar = servicio.alamacenarUsuario(usuNuevo);
+		LOG.info("Se ha podido guardar con exito el usuario {" + usuNuevo.toString() + "}");
+		return ResponseEntity.status(HttpStatus.CREATED).body(guardar);
+	}
+	
+	@DeleteMapping("/borrar/{borrar}")
+	public ResponseEntity<Usuario> borrarSesion(@PathVariable String borrar){
+		LOG.info("Se va a borrar el usuario con el DNI {" + borrar + "}");
+		if(servicio.deleteUsuario(borrar)) {
+			LOG.info("Se ha encontrado el usuario, se procede a borrarlo.");
+			return ResponseEntity.noContent().build();
+		} else {
+			LOG.warn("No se ha encontrado el usuario, no se borrara nada.");
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
+	
 }

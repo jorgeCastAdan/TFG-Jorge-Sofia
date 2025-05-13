@@ -1,7 +1,6 @@
 package jorge.sofia.informacion;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,12 +19,23 @@ public class InformacionService {
 		return (List<Informacion>) repositorio.findAll();
 	}
 	
-	public Informacion recuperarPorTitulo (String titulo) {
-		return repositorio.findByTitulo(titulo);
+	public Informacion recuperarPorCodigo(String codigo){
+		return repositorio.findByCodigo(codigo);
 	}
 	
-	public Optional<Informacion> recuperarPorId(String id){
-		return repositorio.findById(id);
+	public Informacion guardarInformacion(Informacion info) {
+		return repositorio.save(info);
 	}
 
+	public boolean deleteInformacion (String codigo) {
+		Informacion a = this.recuperarPorCodigo(codigo);
+		if(a != null) {
+			repositorio.delete(a);
+			return true;
+		} else {
+			return false;
+		}
+			
+	}
+	
 }

@@ -1,4 +1,4 @@
-package jorge.sofia.actividades;
+package jorge.sofia.sesion;
 
 import java.util.List;
 
@@ -15,23 +15,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import clases.Actividad;
+import clases.Sesion;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/santanica/actividades")
-public class ActividadController {
+@RequestMapping("/santanica/sesion")
+public class SesionController {
 	
-	private final Logger LOG = LoggerFactory.getLogger(ActividadController.class);
-	private final ActividadService servicio;
+	private final Logger LOG = LoggerFactory.getLogger(SesionController.class);
+	private final SesionService servicio;
 	
-	public ActividadController(ActividadService servicio) {
+	public SesionController(SesionService servicio) {
 		this.servicio = servicio;
 	}
 	
 	@GetMapping("/id/{id}")
-	public ResponseEntity<Actividad> getPorCodigo(@PathVariable String id){
-		Actividad buscada = servicio.buscarPorCodigo(id);
+	public ResponseEntity<Sesion> getPorToken(@PathVariable String id){
+		Sesion buscada = servicio.getPorToken(id);
 		LOG.info("Se ha pedido buscar una actividad por el id {" + id + "}");
 		if(buscada != null) {
 			LOG.info("Se ha encontrado la actividad, devolviendola...");
@@ -43,8 +43,8 @@ public class ActividadController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Actividad>> getTodos(){
-		List<Actividad> actividades = servicio.recuperarTodos();
+	public ResponseEntity<List<Sesion>> getTodos(){
+		List<Sesion> actividades = servicio.recuperarTodos();
 		LOG.debug("Se ha solicitado listar todas las actividades.");
 		if(actividades.isEmpty()) {
 			LOG.warn("No se han podido devolver o no se han encontrado actividades.");
@@ -56,21 +56,22 @@ public class ActividadController {
 	}
 	
 	@PostMapping("/nuevo")
-	public ResponseEntity<Actividad> guardarActividad(@RequestBody Actividad nueva){
-		Actividad guardar = servicio.almacenarActividad(nueva);
+	public ResponseEntity<Sesion> guardarSesion(@RequestBody Sesion nueva){
+		Sesion guardar = servicio.guardarSesion(nueva);
 		return ResponseEntity.status(HttpStatus.CREATED).body(guardar);
 	}
 	
 	@DeleteMapping("/borrar/{borrar}")
-	public ResponseEntity<Actividad> borrarActividad(@PathVariable String borrar){
-		LOG.info("Se va a borrar la actividad con el codigo {" + borrar + "}");
-		if(servicio.deleteActvidad(borrar)) {
-			LOG.info("Se va a borrar la actividad.");
+	public ResponseEntity<Sesion> borrarSesion(@PathVariable String borrar){
+		LOG.info("Se va a borrar la sesion con el token {" + borrar + "}");
+		if(servicio.deleteSesion(borrar)) {
+			LOG.info("Se ha borrado correctamente el token.");
 			return ResponseEntity.noContent().build();
 		} else {
-			LOG.warn("No se ha encontrado la actividad con ese codigo, no se borrara nada.");
+			LOG.warn("No se ha encontrado el token, no se borrara nada.");
 			return ResponseEntity.notFound().build();
 		}
 		
 	}
+	
 }

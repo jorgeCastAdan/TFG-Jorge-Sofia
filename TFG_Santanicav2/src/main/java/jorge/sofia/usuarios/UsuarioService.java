@@ -17,11 +17,23 @@ public class UsuarioService {
 		return repositorio.findByDNI(dni);
 	}
 	
-	public Usuario buscarPorEmail(String email) {
-		return repositorio.findByEmail(email);
-	}
-	
 	public List<Usuario> getTodos(){
 		return (List<Usuario>) repositorio.findAll();
 	}
+	
+	public Usuario alamacenarUsuario(Usuario u) {
+		return repositorio.save(u);
+	}
+	
+	public boolean deleteUsuario (String DNI) {
+		Usuario u = this.buscarPorDNI(DNI);
+		if(u != null) {
+			repositorio.delete(u);
+			return true;
+		} else {
+			return false;
+		}
+			
+	}
+	
 }

@@ -17,12 +17,23 @@ public class ActividadService {
 		return repositorio.findByCodigo(cod);
 	}
 	
-	public Actividad buscarPorTitulo(String titulo) {
-		return repositorio.findByTitulo(titulo);
-	}
-	
 	public List<Actividad> recuperarTodos(){
 		return (List<Actividad>)repositorio.findAll();
+	}
+	
+	public Actividad almacenarActividad(Actividad a) {
+		return repositorio.save(a);
+	}
+	
+	public boolean deleteActvidad (String codigo) {
+		Actividad a = this.buscarPorCodigo(codigo);
+		if(a != null) {
+			repositorio.delete(a);
+			return true;
+		} else {
+			return false;
+		}
+			
 	}
 	
 }
