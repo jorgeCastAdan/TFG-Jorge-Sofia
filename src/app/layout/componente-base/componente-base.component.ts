@@ -26,7 +26,7 @@ export class ComponenteBaseComponent {
 
   constructor(private servicioMenu: MenuService, private auth: AuthService, private usuario: UsuarioService){
     this.servicioMenu.recuperarMenu().subscribe( items => this.data = items);
-    if(auth.getToken()){
+    if(auth.getToken() !== ''){
       let token = JSON.parse(this.auth.getToken())
       this.admin = token.esAdmin
     }
