@@ -1,1 +1,21 @@
-<p>actividades works!</p>
+<h1>Actividades</h1>
+<hr/>
+@if(actividades){
+    <div class="container my-4"> <!-- márgenes laterales + verticales -->
+        <div class="row g-4"> <!-- g-4 = espacio (gap) entre columnas/filas -->
+            <ng-container *ngFor="let item of actividades">
+                <div class="col-12 col-md-6 col-lg-4"> <!-- 1 columna en móviles, 2 en tablets, 3 en escritorio -->
+                    <div class="actividad card h-100">
+                        <img [src]="item.img" [alt]="item.titulo" class="card-img-top" />
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <h2 class="card-title h5">{{item.titulo}}</h2>
+                            <p class="card-text">{{item.descripcion | cortarDesc}}</p>
+                            <button (click)="abrirActividad(item.codigo)">Más
+                                información</button>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+}

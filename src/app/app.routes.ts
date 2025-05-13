@@ -14,7 +14,12 @@ export const routes: Routes = [
             {
                 path: 'actividades',
                 canActivate:[registradoGuard],
-                loadComponent: () => import('./componentes/actividades/actividades.component').then(m => m.ActividadesComponent)
+                loadComponent: () => import('./componentes/actividades/actividades.component').then(m => m.ActividadesComponent),
+            },
+            {
+                path:'actividad/:codigo',
+                canActivate:[registradoGuard],
+                loadComponent: () => import('./componentes/actividades/actividad/actividad.component').then(m => m.ActividadComponent)
             },
             {
                 path:'lugares-interes',

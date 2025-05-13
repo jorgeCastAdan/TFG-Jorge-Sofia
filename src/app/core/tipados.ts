@@ -35,3 +35,15 @@ export type Info = {
   img:string,
   titulo:string
 }
+
+export type Actividad = {
+  codigo:string,
+  asistentes:string[],
+  descripcion:string,
+  editando:boolean,
+  reservable:boolean,
+  titulo:string,
+  tipo:string,
+  img:string,
+  fecha:string
+}
