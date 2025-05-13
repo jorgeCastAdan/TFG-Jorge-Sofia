@@ -14,7 +14,12 @@ export const routes: Routes = [
             {
                 path: 'actividades',
                 canActivate:[registradoGuard],
-                loadComponent: () => import('./componentes/actividades/actividades.component').then(m => m.ActividadesComponent)
+                loadComponent: () => import('./componentes/actividades/actividades.component').then(m => m.ActividadesComponent),
+            },
+            {
+                path:'actividad/:codigo',
+                canActivate:[registradoGuard],
+                loadComponent: () => import('./componentes/actividades/actividad/actividad.component').then(m => m.ActividadComponent)
             },
             {
                 path:'lugares-interes',
@@ -26,11 +31,11 @@ export const routes: Routes = [
                 children: [
                     {
                         path:'asociados',
-                        loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
+                        loadComponent: () => import('./componentes/gestion/asociados/asociados.component').then(m => m.AsociadosComponent)
                     },
                     {
                         path: 'eventos',
-                        loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
+                        loadComponent: () => import('./componentes/gestion/eventos/eventos.component').then(m => m.EventosComponent)
                     }
                 ]
             },

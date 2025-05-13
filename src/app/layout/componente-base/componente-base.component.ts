@@ -12,7 +12,7 @@ import { UsuarioService } from '../../core/services/usuario.service';
 @Component({
   selector: 'app-componente-base',
   standalone:true,
-  imports: [NavComponent, MatSidenavModule, RouterOutlet, NgFor, MatButtonModule, MatIconModule, NgIf],
+  imports: [NavComponent, MatSidenavModule, RouterOutlet, NgFor, MatButtonModule, MatIconModule],
   templateUrl: './componente-base.component.html',
   styleUrl: './componente-base.component.css'
 })
@@ -26,10 +26,11 @@ export class ComponenteBaseComponent {
 
   constructor(private servicioMenu: MenuService, private auth: AuthService, private usuario: UsuarioService){
     this.servicioMenu.recuperarMenu().subscribe( items => this.data = items);
-    let token = this.auth.getToken()
-    if(token){
-      this.usuario.getUsuario(token).subscribe((us)=>this.admin = us.esAdmin)
+    if(auth.getToken()){
+      let token = JSON.parse(this.auth.getToken())
+      this.admin = token.esAdmin
     }
+
   }
 
   abrirMenu() {

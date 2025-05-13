@@ -1,1 +1,35 @@
-<p>inicio works!</p>
+@if(informacion){
+    <swiper-container
+        class="swiper"
+        id="swiper"
+        [pagination]="{ clickable: true, dynamicBullets : true }"
+        navigation="true"
+        loop="true"
+        [spaceBetween]="20"
+    >
+        <ng-container *ngFor="let item of informacion">
+            <swiper-slide>
+                <div class="contenido-slide">
+                    <img src="imagenes\pexels-markusspiske-102726.jpg" (click)="mostrarItem(item.titulo)">
+                    <h2 class="texto-slide">{{item.titulo}}</h2>
+                </div>
+            </swiper-slide>
+        </ng-container>
+    </swiper-container>
+
+    <div clas="informacion">
+        <ng-container *ngFor="let item of informacion">
+            <mat-card id="{{item.titulo}}">
+                <mat-card-header>
+                    <mat-card-title>{{item.titulo}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="imagenes\pexels-markusspiske-102726.jpg" class="imgItem">
+                <mat-card-content>
+                    <p>
+                        {{item.descripcion}}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </ng-container>
+    </div>
+}

@@ -13,3 +13,6 @@ mat-drawer-container {
 .menuItem{
   height: 60px;
 }
+button:hover{
+  background-color: transparent;
+}

@@ -22,6 +22,4 @@ export class UsuarioService {
   getAllUsuarios(){
     return this.http.get<Usuario[]>(BASE_URL)
   }
-
-
 }

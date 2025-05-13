@@ -1,0 +1,39 @@
+ul {
+    width: 60%;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+ul>li {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    background-color: #fff;
+    text-align: center;
+}
+
+li>a {
+    width: 100%;
+    font-weight: bold;
+    border-bottom: 4px solid #fff;
+    display: inline-block;
+    padding: 0.5em;
+    list-style-position: inside;
+    background-color: white;
+    color: #666;
+    border-bottom: 4px solid #fff;
+    margin-right: 0.2em;
+    font-weight: bold;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+}
+
+a:focus,
+.nav_list_item-selected a {
+    background-color: #e9bfbf;
+}
+
+h1 {
+    margin-top: 20px;
+}

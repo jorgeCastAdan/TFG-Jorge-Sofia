@@ -1,0 +1,25 @@
+<div class="contenido">
+    <div class="container-img">
+        <div class="img-blur-bg" style="background-image: url({{fondoUrl}})"></div>
+        <img src="{{actividad.img}}" alt="{{actividad.titulo}}">
+    </div>
+
+    <div class="container-act">
+        <h2>{{actividad.titulo}}</h2>
+
+        <hr/>
+
+        <h3>Descripción</h3>
+        <p>{{actividad.descripcion}}</p>
+
+        <h3>Fecha y hora</h3>
+        <p>{{actividad.fecha}}</p>
+
+        <h3>Ubicación</h3>
+        <p>{{actividad.direccion}}</p>
+        
+        @if(actividad.reservable){
+            <button (click)="participar()">Participar</button> 
+        }
+    </div>
+</div>

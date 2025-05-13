@@ -30,20 +30,18 @@ export class EditarComponent {
 
 
   constructor(private auth : AuthService, private fb:FormBuilder, private usuarioService : UsuarioService){
-    usuarioService.getUsuario(auth.getToken()).subscribe(
-      (usuario) => {
-        console.log(usuario)
-        this.usuarioForm = this.fb.group({
-          email: [`${usuario.email}`, [Validators.required, Validators.email]],
-          contraseña: [`${usuario.contrasena}`, Validators.required],
-          apellidos: [`${usuario.apellidos}`, Validators.required],
-          nombre: [`${usuario.nombre}`, Validators.required],
-          direccion: [`${usuario.calle}`, Validators.required],
-          dni: [`${usuario.dni}`, Validators.required],
-          telefono: [`${usuario.telefono}`, Validators.required]
-        })
-      }
-    )
+
+    let usuario = JSON.parse(auth.getToken())
+
+    this.usuarioForm = this.fb.group({
+      email: [`${usuario.email}`, [Validators.required, Validators.email]],
+      contraseña: [`${usuario.contrasena}`, Validators.required],
+      apellidos: [`${usuario.apellidos}`, Validators.required],
+      nombre: [`${usuario.nombre}`, Validators.required],
+      direccion: [`${usuario.calle}`, Validators.required],
+      dni: [`${usuario.dni}`, Validators.required],
+      telefono: [`${usuario.telefono}`, Validators.required]
+    })
 
   }
   usuarioForm! : UsuarioForm;
@@ -59,6 +57,8 @@ export class EditarComponent {
       telefono:form.value.telefono,
       dni:form.value.dni
     }
+
+    this.usuarioService.postUsuario(usuario).subscribe()
     this.auth.setToken(JSON.stringify(usuario))
     window.location.href = '/'
   }

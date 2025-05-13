@@ -62,7 +62,7 @@ export class RegistrarseComponent {
         }
 
         this.usuarioService.postUsuario(us).subscribe((us)=>console.log(us))
-        this.auth.setToken(us.email!)
+        this.auth.setToken(JSON.stringify(us))
         window.location.href = '/'
       }
     })

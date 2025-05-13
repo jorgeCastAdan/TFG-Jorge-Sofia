@@ -54,7 +54,7 @@ export class LoginComponent {
     this.usuarioServicio.getUsuario(correo).subscribe({
       next: (usuario) => {
           if(usuario.contrasena === contraseña){
-            this.auth.setToken(usuario.email)
+            this.auth.setToken(JSON.stringify(usuario))
             window.location.href = '/'
           }
           else{
