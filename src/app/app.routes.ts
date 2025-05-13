@@ -31,11 +31,11 @@ export const routes: Routes = [
                 children: [
                     {
                         path:'asociados',
-                        loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
+                        loadComponent: () => import('./componentes/gestion/asociados/asociados.component').then(m => m.AsociadosComponent)
                     },
                     {
                         path: 'eventos',
-                        loadComponent: () => import('./shared/perfil/editar/editar.component').then(m => m.EditarComponent)
+                        loadComponent: () => import('./componentes/gestion/eventos/eventos.component').then(m => m.EventosComponent)
                     }
                 ]
             },
