@@ -45,5 +45,6 @@ export type Actividad = {
   titulo:string,
   tipo:string,
   img:string,
-  fecha:string
+  fecha:string,
+  direccion:string
 }

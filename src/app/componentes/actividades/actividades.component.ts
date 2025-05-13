@@ -29,7 +29,8 @@ export class ActividadesComponent {
       titulo: "Yoga Básico",
       tipo: "Deporte",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT002",
@@ -40,7 +41,8 @@ export class ActividadesComponent {
       titulo: "Pintura Creativa",
       tipo: "Arte",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT003",
@@ -51,7 +53,8 @@ export class ActividadesComponent {
       titulo: "Meditación Mindfulness",
       tipo: "Bienestar",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT004",
@@ -62,7 +65,8 @@ export class ActividadesComponent {
       titulo: "Web Dev 101",
       tipo: "Tecnología",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT005",
@@ -73,7 +77,8 @@ export class ActividadesComponent {
       titulo: "Funcional Fit",
       tipo: "Deporte",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
    {
       codigo: "ACT001",
@@ -84,7 +89,8 @@ export class ActividadesComponent {
       titulo: "Yoga Básico",
       tipo: "Deporte",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT002",
@@ -95,7 +101,8 @@ export class ActividadesComponent {
       titulo: "Pintura Creativa",
       tipo: "Arte",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT003",
@@ -106,7 +113,8 @@ export class ActividadesComponent {
       titulo: "Meditación Mindfulness",
       tipo: "Bienestar",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT004",
@@ -117,7 +125,8 @@ export class ActividadesComponent {
       titulo: "Web Dev 101",
       tipo: "Tecnología",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     },
     {
       codigo: "ACT005",
@@ -128,7 +137,8 @@ export class ActividadesComponent {
       titulo: "Funcional Fit",
       tipo: "Deporte",
       img: "imagenes/pexels-pixabay-280221.jpg",
-      fecha: "13/0/2025 17:00"
+      fecha: "13/0/2025 17:00",
+      direccion:''
     }]
   }
 

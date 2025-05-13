@@ -12,6 +12,7 @@ mat-toolbar {
 button{
     background-color: white;
 }
+
 label{
     position: absolute;
     left: 50%;

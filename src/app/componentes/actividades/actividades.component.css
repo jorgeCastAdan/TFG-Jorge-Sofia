@@ -2,16 +2,3 @@ h1{
     margin-top: 2.5%;
 }
 
-hr{
-    opacity: 10%;
-}
-
-button{
-    background-color: #d89595;
-    border-color: transparent;
-    color: white;
-}
-
-button:hover{
-    background-color: #af6c6c;
-}

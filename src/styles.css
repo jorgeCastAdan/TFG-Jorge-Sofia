@@ -6,3 +6,17 @@ h1{
     justify-content: center;
     margin-bottom: 50px;
 }
+button{
+    border-radius: 10px;
+    border-color: #d19393;
+    background-color: #d89595;
+    color: white;
+}
+
+button:hover{
+    background-color: #bb7979;
+}
+
+hr{
+    opacity: 10%;
+}
