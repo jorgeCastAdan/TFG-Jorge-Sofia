@@ -1,7 +1,11 @@
-  <button mat-raised-button color="primary" (click)="exportarExcel()">
+<button mat-raised-button color="primary" (click)="exportarExcel()">
     <mat-icon>download</mat-icon>
     Excel
-  </button>
+</button>
+<button mat-raised-button color="primary" (click)="crear()">
+    <mat-icon>add</mat-icon>
+    Crear
+</button>
 <table mat-table [dataSource]="asociados" matSort class="mat-elevation-z8">
 
     <ng-container matColumnDef="acciones">

@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, inject, Injector } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { Usuario } from '../../../core/tipados';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver'
 import { EXCEL_TYPE } from '../../../environment/environment'
+import { CrearRegistroComponent } from './crear-registro/crear-registro.component';
 
 @Component({
   selector: 'app-asociados',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule, MatDialogModule],
   templateUrl: './asociados.component.html',
   styleUrl: './asociados.component.css'
 })
@@ -21,7 +23,7 @@ export class AsociadosComponent {
   asociados!: Usuario[];
   displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'dni', 'email', 'calle', 'esAdmin'];
 
-  constructor(private usuService: UsuarioService) {
+  constructor(private usuService: UsuarioService,   private dialog: MatDialog, private injector: Injector) {
     this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios)
   }
 
@@ -34,7 +36,7 @@ export class AsociadosComponent {
   }
 
   modificar(usuario: any) {
-
+    const dialogRef = this.dialog.open(CrearRegistroComponent, {data: usuario, injector: this.injector})
   }
 
   exportarExcel() {
@@ -59,5 +61,8 @@ export class AsociadosComponent {
   private guardarArchivo(buffer: any, nombreArchivo: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
     FileSaver.saveAs(data, `${nombreArchivo}_${new Date().getTime()}.xlsx`);
+  }
+  crear(){
+    const dialogRef = this.dialog.open(CrearRegistroComponent, {data: {}})
   }
 }

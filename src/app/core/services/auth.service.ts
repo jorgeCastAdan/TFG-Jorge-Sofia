@@ -4,14 +4,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { Usuario } from '../tipados';
 import { SesionesService } from './sesiones.service';
 import { UsuarioService } from './usuario.service';
-import {  BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  token:string;
+  token: string;
 
   private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
   usuario$ = this.usuarioSubject.asObservable();
@@ -25,22 +25,22 @@ export class AuthService {
   constructor() {
     this.token = this.cookies.get('token')
     this.getUsuario().subscribe(resultado => {
-        this.usuarioSubject.next(resultado)
+      this.usuarioSubject.next(resultado)
     })
   }
 
-  getUsuario() :Observable<any> {
-    if(this.token){
+  getUsuario(): Observable<any> {
+    if (this.token) {
       return this.sesionService.getSesion(this.token).pipe(
         switchMap(sesion => this.usService.getUsuario(sesion.email))
       )
     }
-    else{
+    else {
       return of(0)
     }
   }
 
-    get usuario(): Usuario | null {
+  get usuario(): Usuario | null {
     return this.usuarioSubject.value;
   }
 
@@ -57,7 +57,7 @@ export class AuthService {
 
   cerrarSesion() {
     this.sesionService.deleteSesion(this.token).subscribe()
-    this.cookies.delete('token')
+    this.cookies.delete('token', '/')
   }
 
   calcularTTL() {

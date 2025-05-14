@@ -61,4 +61,8 @@ export class EventosComponent {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
     FileSaver.saveAs(data, `${nombreArchivo}_${new Date().getTime()}.xlsx`);
   }
+
+  crear(){
+    
+  }
 }

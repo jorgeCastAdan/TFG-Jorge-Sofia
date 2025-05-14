@@ -1,0 +1,64 @@
+<h1 mat-dialog-title>Nuevo registro</h1>
+<div mat-dialog-content>
+    <form [formGroup]="usuarioForm" (ngSubmit)="onSubmit(usuarioForm)">
+        <mat-form-field>
+            <mat-label>Correo electrónico</mat-label>
+            <input matInput type="email" formControlName="email" required autocomplete="email">
+            <mat-error *ngIf="usuarioForm.get('email')?.hasError('required')">Tienes que introducir un valor</mat-error>
+            <mat-error *ngIf="usuarioForm.get('email')?.hasError('email')">No has introducido un email</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input matInput formControlName="contraseña" [type]="hide ? 'password' : 'text'" required>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error *ngIf="usuarioForm.get('contraseña')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Nombre</mat-label>
+            <input matInput formControlName="nombre" required>
+            <mat-error *ngIf="usuarioForm.get('nombre')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Apellidos</mat-label>
+            <input matInput formControlName="apellidos" required>
+            <mat-error *ngIf="usuarioForm.get('apellidos')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Teléfono</mat-label>
+            <input matInput formControlName="telefono" required>
+            <mat-error *ngIf="usuarioForm.get('telefono')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>DNI</mat-label>
+            <input matInput formControlName="dni" required>
+            <mat-error *ngIf="usuarioForm.get('dni')?.hasError('required')">Tienes que introducir un valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion" required>
+            <mat-error *ngIf="usuarioForm.get('direccion')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="esAdmin">Administrador</mat-checkbox>
+
+        <div style="margin-top: 16px;">
+            <button mat-raised-button color="primary" type="submit" [disabled]="usuarioForm.invalid">
+                Guardar
+            </button>
+            <div *ngIf="usuarioIncorrecto" class="errorPersonalizado">
+                El usuario ya existe
+            </div>
+        </div>
+    </form>
+</div>
