@@ -10,7 +10,7 @@
               {{item.name}}
             </button>
           }
-          @else if(admin){
+          @else if(!admin){
             <button mat-button class = "menuItem" (click)="cambiarRuta(item.ruta)">
               <mat-icon>{{item.icon}}</mat-icon>
               {{item.name}}

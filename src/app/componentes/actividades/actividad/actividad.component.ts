@@ -2,14 +2,13 @@ import { Component} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actividad } from '../../../core/tipados';
 import { ActividadesService } from '../../../core/services/actividades.service';
-import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import Swal from 'sweetalert2';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-actividad',
   standalone:true,
-  imports: [SweetAlert2Module, MatSnackBarModule],
+  imports: [MatSnackBarModule],
   templateUrl: './actividad.component.html',
   styleUrl: './actividad.component.css'
 })
