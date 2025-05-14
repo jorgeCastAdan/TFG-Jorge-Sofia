@@ -1,17 +1,26 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { filter, map, take } from 'rxjs';
 
 export const adminGuard: CanActivateFn = (route, state) => {
   let auth = inject(AuthService)
 
   let router = inject(Router)
-  let usuario = auth.usuario;
 
-  if(usuario !== 0){
-    if(usuario!.esAdmin){return true}
-    else{return router.parseUrl('/')}
-  }
-  
-  return false
+  return auth.usuario$.pipe(
+    filter(usuario => usuario !== null),
+    take(1),
+    map(usuario => {
+      if (usuario?.esAdmin) {
+        return true;
+      } else {
+        window.location.href = '/';
+        return false;
+      }
+
+    })
+
+  );
+
 };

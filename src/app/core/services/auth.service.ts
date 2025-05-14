@@ -4,7 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Usuario } from '../tipados';
 import { SesionesService } from './sesiones.service';
 import { UsuarioService } from './usuario.service';
-import {  Observable, of, switchMap } from 'rxjs';
+import {  BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,8 @@ export class AuthService {
 
   token:string;
 
-  usuario: any;
+  private usuarioSubject = new BehaviorSubject<Usuario | null>(null);
+  usuario$ = this.usuarioSubject.asObservable();
 
   cookies = inject(CookieService)
 
@@ -24,7 +25,7 @@ export class AuthService {
   constructor() {
     this.token = this.cookies.get('token')
     this.getUsuario().subscribe(resultado => {
-        this.usuario = resultado
+        this.usuarioSubject.next(resultado)
     })
   }
 
@@ -39,8 +40,12 @@ export class AuthService {
     }
   }
 
+    get usuario(): Usuario | null {
+    return this.usuarioSubject.value;
+  }
+
   setUsuario(usuario: any) {
-    this.usuario = usuario
+    this.usuarioSubject = usuario
   }
 
   createToken(email: string) {

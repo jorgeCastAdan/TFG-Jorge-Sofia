@@ -6,10 +6,14 @@ export const registradoGuard: CanActivateFn =  () => {
   
   const auth = inject(AuthService)
   const router = inject(Router);
+  let usuario;
+
+  auth.usuario$.subscribe(us=> usuario = us)
   
-  if(auth.usuario !== null){
+  if(usuario !== 0){
     return true;
   }
   
-  return router.parseUrl('/login')
+  router.navigate(['/login'])
+  return false;
 }
