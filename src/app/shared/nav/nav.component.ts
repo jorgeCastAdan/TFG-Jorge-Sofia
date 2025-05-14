@@ -1,10 +1,11 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatMenuModule} from '@angular/material/menu';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { Usuario } from '../../core/tipados';
 
 @Component({
   selector: 'app-nav',
@@ -17,19 +18,15 @@ export class NavComponent {
 
   auth =  inject(AuthService);
 
-  autorizado:boolean = false;
-
   private router = inject(Router)
 
+  @Input({required:true}) usuario! : any;
   @Output() sidenav = new EventEmitter();
   @Output() abrirPerfil = new EventEmitter();
 
 
   constructor()
   {
-    if(this.auth.getToken()){
-      this.autorizado = true;
-    }
 
   }
 
@@ -50,6 +47,6 @@ export class NavComponent {
   cerrar(){
     this.auth.cerrarSesion()
     this.abrirPerfil.emit()
-    window.location.reload()
+    window.location.href = '/'
   }
 }

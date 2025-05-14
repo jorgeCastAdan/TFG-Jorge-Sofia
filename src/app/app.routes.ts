@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { registradoGuard } from './core/guardias/registrado.guard';
 import { ComponenteBaseComponent } from './layout/componente-base/componente-base.component';
+import { adminGuard } from './core/guardias/admin.guard';
 
 export const routes: Routes = [
     {
@@ -27,6 +28,8 @@ export const routes: Routes = [
             },
             {
                 path: 'gestion',
+                canActivate: [adminGuard],
+                canActivateChild:[adminGuard],
                 loadComponent: () => import('./componentes/gestion/gestion.component').then(m => m.GestionComponent),
                 children: [
                     {

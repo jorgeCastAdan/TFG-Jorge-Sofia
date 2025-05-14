@@ -1,20 +1,21 @@
-<app-nav (sidenav)="abrirMenu()" (abrirPerfil)="cerrarMenu()"></app-nav>
+@if(usuario !== null){
+  <app-nav (sidenav)="abrirMenu()" (abrirPerfil)="cerrarMenu()" [usuario]="usuario"></app-nav>
 
-<mat-drawer-container autosize>
+  <mat-drawer-container autosize>
     <mat-drawer #drawer mode="over">
       <div>
         <ng-container *ngFor="let item of data">
           @if(!item.admin){
-            <button mat-button class = "menuItem" (click)="cambiarRuta(item.ruta)">
-              <mat-icon>{{item.icon}}</mat-icon>
-              {{item.name}}
-            </button>
+          <button mat-button class="menuItem" (click)="cambiarRuta(item.ruta)">
+            <mat-icon>{{item.icon}}</mat-icon>
+            {{item.name}}
+          </button>
           }
-          @else if(!admin){
-            <button mat-button class = "menuItem" (click)="cambiarRuta(item.ruta)">
-              <mat-icon>{{item.icon}}</mat-icon>
-              {{item.name}}
-            </button>
+          @else if(usuario.esAdmin){
+          <button mat-button class="menuItem" (click)="cambiarRuta(item.ruta)">
+            <mat-icon>{{item.icon}}</mat-icon>
+            {{item.name}}
+          </button>
           }
 
         </ng-container>
@@ -26,4 +27,5 @@
       </div>
     </mat-drawer-content>
 
-</mat-drawer-container>
+  </mat-drawer-container>
+}

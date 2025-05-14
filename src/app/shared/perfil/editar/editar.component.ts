@@ -6,7 +6,6 @@ import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthService } from '../../../core/services/auth.service';
 import { UsuarioService } from '../../../core/services/usuario.service';
-import {Usuario} from '../../../core/tipados'
 
 type UsuarioForm = FormGroup<{
   email: FormControl<string | null>;
@@ -31,16 +30,16 @@ export class EditarComponent {
 
   constructor(private auth : AuthService, private fb:FormBuilder, private usuarioService : UsuarioService){
 
-    let usuario = JSON.parse(auth.getToken())
+    let usuario = auth.usuario
 
     this.usuarioForm = this.fb.group({
-      email: [`${usuario.email}`, [Validators.required, Validators.email]],
-      contraseña: [`${usuario.contrasena}`, Validators.required],
-      apellidos: [`${usuario.apellidos}`, Validators.required],
-      nombre: [`${usuario.nombre}`, Validators.required],
-      direccion: [`${usuario.calle}`, Validators.required],
-      dni: [`${usuario.dni}`, Validators.required],
-      telefono: [`${usuario.telefono}`, Validators.required]
+      email: [`${usuario!.email}`, [Validators.required, Validators.email]],
+      contraseña: [`${usuario!.contrasena}`, Validators.required],
+      apellidos: [`${usuario!.apellidos}`, Validators.required],
+      nombre: [`${usuario!.nombre}`, Validators.required],
+      direccion: [`${usuario!.calle}`, Validators.required],
+      dni: [`${usuario!.dni}`, Validators.required],
+      telefono: [`${usuario!.telefono}`, Validators.required]
     })
 
   }
@@ -59,7 +58,7 @@ export class EditarComponent {
     }
 
     this.usuarioService.postUsuario(usuario).subscribe()
-    this.auth.setToken(JSON.stringify(usuario))
+    this.auth.setUsuario(usuario);
     window.location.href = '/'
   }
 }

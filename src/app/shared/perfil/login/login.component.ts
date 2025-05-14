@@ -31,13 +31,12 @@ export class LoginComponent {
   hide: boolean;
 
   constructor(
-    private fb: FormBuilder, 
-    private cdr: ChangeDetectorRef)
+    private fb: FormBuilder,)
   {
     this.hide = true;
     this.usuario = this.fb.group({
       contraseña: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]]
+      correo: ['', [Validators.required]]
     })
     
   }
@@ -54,7 +53,7 @@ export class LoginComponent {
     this.usuarioServicio.getUsuario(correo).subscribe({
       next: (usuario) => {
           if(usuario.contrasena === contraseña){
-            this.auth.setToken(JSON.stringify(usuario))
+            this.auth.createToken(correo)
             window.location.href = '/'
           }
           else{

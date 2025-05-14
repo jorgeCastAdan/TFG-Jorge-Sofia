@@ -48,3 +48,9 @@ export type Actividad = {
   fecha: string,
   direccion: string
 }
+
+export type Sesion = {
+  token: string,
+  email:string,
+  ttl:number
+}

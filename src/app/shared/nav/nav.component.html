@@ -3,12 +3,12 @@
       <mat-icon>menu</mat-icon>
     </button>
     <label>Santanica</label>
-    @if(!autorizado){
+    @if(usuario === 0){
       <button mat-icon-button aria-label="Iniciar sesión" class="sesion" (click)="perfil()">
         <mat-icon>person_off</mat-icon>
       </button>
     }
-    @if(autorizado){
+    @else{
       <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Iniciar sesión" class="sesion">
         <mat-icon>person</mat-icon>
       </button>

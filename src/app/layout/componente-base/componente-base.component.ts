@@ -1,6 +1,6 @@
-import { Component, inject, ViewChild } from '@angular/core';
-import {MatButtonModule} from '@angular/material/button';
-import {MatDrawer, MatSidenavModule} from '@angular/material/sidenav'
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav'
 import { MatIconModule } from '@angular/material/icon'
 import { NavComponent } from "../../shared/nav/nav.component";
 import { Router, RouterOutlet } from '@angular/router';
@@ -8,40 +8,40 @@ import { MenuService } from '../../core/services/menu-service.service';
 import { NgFor, NgIf } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 import { UsuarioService } from '../../core/services/usuario.service';
+import { Usuario } from '../../core/tipados';
 
 @Component({
   selector: 'app-componente-base',
-  standalone:true,
+  standalone: true,
   imports: [NavComponent, MatSidenavModule, RouterOutlet, NgFor, MatButtonModule, MatIconModule],
   templateUrl: './componente-base.component.html',
   styleUrl: './componente-base.component.css'
 })
-export class ComponenteBaseComponent {
+export class ComponenteBaseComponent implements OnInit {
   @ViewChild('drawer') drawer!: MatDrawer;
   data: any;
 
   router = inject(Router)
 
-  admin:boolean = false;
+  usuario: any = null;
 
-  constructor(private servicioMenu: MenuService, private auth: AuthService, private usuario: UsuarioService){
-    this.servicioMenu.recuperarMenu().subscribe( items => this.data = items);
-    if(auth.getToken() !== ''){
-      let token = JSON.parse(this.auth.getToken())
-      this.admin = token.esAdmin
-    }
+  constructor(private servicioMenu: MenuService, private auth: AuthService) {
 
+  }
+  ngOnInit(): void {
+    this.servicioMenu.recuperarMenu().subscribe(items => this.data = items);
+    this.auth.getUsuario().subscribe(us => this.usuario = us);
   }
 
   abrirMenu() {
     this.drawer.toggle()
   }
 
-  cerrarMenu(){
+  cerrarMenu() {
     this.drawer.close()
   }
 
-  cambiarRuta(ruta:any){
+  cambiarRuta(ruta: any) {
     this.router.navigate([ruta]);
     this.drawer.close();
   }
