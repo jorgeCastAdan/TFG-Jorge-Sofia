@@ -30,10 +30,10 @@ public class SitiosController {
 	
 	@GetMapping
 	public ResponseEntity<List<Sitios_interes>> getTodos(){
-		LOG.info("Se van a recuperar todos los usuarios");
+		LOG.info("Se van a recuperar todos los sitios de interes");
 		List<Sitios_interes> sitios = servicio.buscarTodos();
 		if(sitios.isEmpty()) {
-			LOG.error("No se han podido recuperar los usuarios");
+			LOG.error("No se han podido recuperar los sitios de interes");
 			return ResponseEntity.notFound().build();
 		} else {
 			return ResponseEntity.ok(sitios);
@@ -42,17 +42,22 @@ public class SitiosController {
 	
 	@GetMapping("/id/{codigo}")
 	public ResponseEntity<Sitios_interes> getPorCodigo(@PathVariable String codigo){
+		LOG.info("Se va a buscar en la tabla de sitios de interes por el codigo {" + codigo + "}");
 		Sitios_interes buscado = servicio.buscarPorCodigo(codigo);
 		if(buscado != null) {
+			LOG.info("Se ha encontrado el sitio con titulo {" + buscado.getLugar() + "}");
 			return ResponseEntity.ok(buscado);
 		} else {
+			LOG.warn("No se ha encontrado el sitio de interes");
 			return ResponseEntity.notFound().build();
 		}
 	}
 	
 	@PostMapping("/nuevo")
 	public ResponseEntity<Sitios_interes> guardarSitios(@RequestBody Sitios_interes nuevo){
+		LOG.info("Se va a guardar un nuevo sitio de interes");
 		Sitios_interes guardar = servicio.alamcenarSitios(nuevo);
+		LOG.info("Se ha guardado correctamente el sitio de interes {" + nuevo.toString() + "}");
 		return ResponseEntity.status(HttpStatus.CREATED).body(guardar);
 	}
 	

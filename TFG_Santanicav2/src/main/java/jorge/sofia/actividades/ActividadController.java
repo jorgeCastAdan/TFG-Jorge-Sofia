@@ -57,7 +57,9 @@ public class ActividadController {
 	
 	@PostMapping("/nuevo")
 	public ResponseEntity<Actividad> guardarActividad(@RequestBody Actividad nueva){
+		LOG.info("Se va a guardar una nueva actividad.");
 		Actividad guardar = servicio.almacenarActividad(nueva);
+		LOG.info("Se ha guardado correctamente la acitividad {" + nueva.getTitulo() + "}");
 		return ResponseEntity.status(HttpStatus.CREATED).body(guardar);
 	}
 	

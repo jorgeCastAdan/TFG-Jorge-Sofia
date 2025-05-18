@@ -42,6 +42,20 @@ public class UsuarioController {
 		
 	}
 	
+	@GetMapping("/email/{email}")
+	public ResponseEntity<Usuario> getUsuEmail(@PathVariable String email) {
+		Usuario buscado = servicio.buscarPorEmail(email);
+		LOG.info("Se ha hecho una peticion de usuario por el email, {" + email + "}");
+		if(buscado != null) {
+			LOG.info("Se ha encontrado usuario, devolviendolo...");
+			return ResponseEntity.ok(buscado);
+		} else {
+			LOG.warn("No se ha encontrado el usuario.");
+			return ResponseEntity.notFound().build();
+		}
+		
+	}
+	
 	@GetMapping
 	public ResponseEntity<List<Usuario>> getTodos(){
 		LOG.info("Se van a recuperar todos los usuarios");
@@ -64,7 +78,7 @@ public class UsuarioController {
 	
 	@DeleteMapping("/borrar/{borrar}")
 	public ResponseEntity<Usuario> borrarSesion(@PathVariable String borrar){
-		LOG.info("Se va a borrar el usuario con el DNI {" + borrar + "}");
+		LOG.info("Se va a borrar el usuario con el email {" + borrar + "}");
 		if(servicio.deleteUsuario(borrar)) {
 			LOG.info("Se ha encontrado el usuario, se procede a borrarlo.");
 			return ResponseEntity.noContent().build();

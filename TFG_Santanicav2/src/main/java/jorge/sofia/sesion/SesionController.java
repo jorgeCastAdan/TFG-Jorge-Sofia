@@ -32,12 +32,12 @@ public class SesionController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<Sesion> getPorToken(@PathVariable String id){
 		Sesion buscada = servicio.getPorToken(id);
-		LOG.info("Se ha pedido buscar una actividad por el id {" + id + "}");
+		LOG.info("Se ha pedido buscar una sesion por el id {" + id + "}");
 		if(buscada != null) {
-			LOG.info("Se ha encontrado la actividad, devolviendola...");
+			LOG.info("Se ha encontrado la sesion, devolviendola...");
 			return ResponseEntity.ok(buscada);
 		} else {
-			LOG.warn("No se ha encontrado la actividad con id {" + id + "}");
+			LOG.warn("No se ha encontrado la sesion con id {" + id + "}");
 			return ResponseEntity.notFound().build();
 		}
 	}
@@ -45,19 +45,21 @@ public class SesionController {
 	@GetMapping
 	public ResponseEntity<List<Sesion>> getTodos(){
 		List<Sesion> actividades = servicio.recuperarTodos();
-		LOG.debug("Se ha solicitado listar todas las actividades.");
+		LOG.debug("Se ha solicitado listar todas las sesion.");
 		if(actividades.isEmpty()) {
-			LOG.warn("No se han podido devolver o no se han encontrado actividades.");
+			LOG.warn("No se han podido devolver o no se han encontrado sesion.");
 			return ResponseEntity.notFound().build();
 		} else {
-			LOG.info("Devolviendo una lista de las actividades...");
+			LOG.info("Devolviendo una lista de las sesion...");
 			return ResponseEntity.ok(actividades);
 		}
 	}
 	
 	@PostMapping("/nuevo")
 	public ResponseEntity<Sesion> guardarSesion(@RequestBody Sesion nueva){
+		LOG.info("Se va a almacenar una nueva sesion. {" + nueva.toString() + "}");
 		Sesion guardar = servicio.guardarSesion(nueva);
+		LOG.info("Se ha guardado correctamente la sesion.");
 		return ResponseEntity.status(HttpStatus.CREATED).body(guardar);
 	}
 	

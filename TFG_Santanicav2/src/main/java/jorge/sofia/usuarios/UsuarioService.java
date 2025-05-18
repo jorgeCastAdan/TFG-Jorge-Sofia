@@ -17,6 +17,10 @@ public class UsuarioService {
 		return repositorio.findByDNI(dni);
 	}
 	
+	public Usuario buscarPorEmail(String email) {
+		return repositorio.findByEmail(email);
+	}
+	
 	public List<Usuario> getTodos(){
 		return (List<Usuario>) repositorio.findAll();
 	}
@@ -25,8 +29,8 @@ public class UsuarioService {
 		return repositorio.save(u);
 	}
 	
-	public boolean deleteUsuario (String DNI) {
-		Usuario u = this.buscarPorDNI(DNI);
+	public boolean deleteUsuario (String email) {
+		Usuario u = this.buscarPorEmail(email);
 		if(u != null) {
 			repositorio.delete(u);
 			return true;
