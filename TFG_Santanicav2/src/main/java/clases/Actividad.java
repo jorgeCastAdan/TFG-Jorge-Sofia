@@ -1,6 +1,7 @@
 package clases;
 
-import java.util.Map;
+import java.util.List;
+
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
@@ -16,35 +17,40 @@ import lombok.NoArgsConstructor;
 @DynamoDBTable(tableName = "Actividades")
 public class Actividad {
 	
-	private String id;
 	private String titulo;
-	private String descipcion;
+	private String descripcion;
 	private boolean editando;
+	private String codigo;
 	private boolean reservable;
-	private Map<String, String> asistentes;
+	private String tipo;
+	private String direccion;
+	private String fecha;
+	private String imagen;
+	private List<String> asistentes;
 	
-	@DynamoDBHashKey(attributeName = "id")
-	public String getId() {
-		return id;
+	@DynamoDBHashKey(attributeName = "codigo")
+	public String getCodigo() {
+		return codigo;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	@DynamoDBAttribute(attributeName = "titulo")
 	public String getTitulo() {
 		return titulo;
 	}
+	
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 	
 	@DynamoDBAttribute(attributeName = "descripcion")
-	public String getDescipcion() {
-		return descipcion;
+	public String getDescripcion() {
+		return descripcion;
 	}
-	public void setDescipcion(String descipcion) {
-		this.descipcion = descipcion;
+	public void setDescripcion(String descipcion) {
+		this.descripcion = descipcion;
 	}
 	
 	@DynamoDBAttribute (attributeName = "editando")
@@ -64,11 +70,50 @@ public class Actividad {
 	}
 	
 	@DynamoDBAttribute (attributeName = "asistentes")
-	public Map<String, String> getAsistentes() {
+	public List<String> getAsistentes() {
 		return asistentes;
 	}
-	public void setAsistentes(Map<String, String> asistentes) {
+	
+	public void setAsistentes(List<String> asistentes) {
 		this.asistentes = asistentes;
+	}
+	
+	@DynamoDBAttribute (attributeName = "tipo")
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
+	@DynamoDBAttribute (attributeName = "direccion")
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	
+	@DynamoDBAttribute (attributeName = "fecha")
+	public String getFecha() {
+		return fecha;
+	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
+	
+	@DynamoDBAttribute (attributeName = "imagen")
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+	@Override
+	public String toString() {
+		return "Actividad [titulo=" + titulo + ", descripcion=" + descripcion + ", editando=" + editando + ", codigo="
+				+ codigo + ", reservable=" + reservable + ", tipo=" + tipo + ", direccion=" + direccion + ", fecha="
+				+ fecha + ", asistentes=" + asistentes + "]";
 	}
 	
 }
