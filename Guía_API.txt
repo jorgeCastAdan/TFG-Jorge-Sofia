@@ -1,0 +1,33 @@
+Guía de rutas de la API:
+
+Ruta base: http://localhost:8083
+
+--Usuarios--
+  -Lista de todos los usuarios: /usuarios
+  -Usuario por email: /usuarios/emai/jogito@email.com
+  -Nuevo usuario: /nuevo (con el nuevo usuario pasado por body)
+  -Borrar usuario: /borrar/email@ejemplo.com
+
+--Actividades--
+  -Lista de todas las actividades: /actividades
+  -Actividades por código: /actividades/id/1
+  -Nueva actividad: /nuevo (con el nuevo actividad pasado por body)
+  -Borrar actividad: /borrar/codigo
+
+--Informacion--
+  -Lista de toda la información: /informacion
+  -Información por código: /informacion/id/Texto_4
+  -Nuevo informacion: /nuevo (con la nuevo informacion pasado por body)
+  -Borrar informacion: /borrar/codigo
+
+--Sitios de interes--
+  -Lista de todos los sitios: /sitios
+  -Sitios por código: /sitios/id/1
+  -Nuevo stios: /nuevo (con el nuevo sitio pasado por body)
+  -Borrar sitio: /borrar/codigo
+
+--Sesion--
+  -Lista de todos las sesiones: /sesion
+  -Sesion por código: /sitios/id/1
+  -Nuevo stios: /nuevo (con la nuevo sesion pasado por body)
+  -Borrar sitio: /borrar/codigo
