@@ -3,7 +3,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import {MatDialog, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { Usuario } from '../../../core/tipados';
 import * as XLSX from 'xlsx';
@@ -23,7 +23,7 @@ export class AsociadosComponent {
   asociados!: Usuario[];
   displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'dni', 'email', 'calle', 'esAdmin'];
 
-  constructor(private usuService: UsuarioService,   private dialog: MatDialog, private injector: Injector) {
+  constructor(private usuService: UsuarioService, private dialog: MatDialog) {
     this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios)
   }
 
@@ -32,22 +32,23 @@ export class AsociadosComponent {
   }
 
   borrar(usuario: any) {
-
+    this.usuService.deleteUsuario(usuario.email).subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
   }
 
   modificar(usuario: any) {
-    const dialogRef = this.dialog.open(CrearRegistroComponent, {data: usuario, injector: this.injector})
+    const dialogRef = this.dialog.open(CrearRegistroComponent, { data: usuario })
+    dialogRef.afterClosed().subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
   }
 
   exportarExcel() {
     let datosExportar = this.asociados.map(a => ({
-      Email:a.email,
-      Nombre:a.nombre,
-      Apellidos:a.apellidos,
-      DNI:a.dni,
-      Teléfono:a.telefono,
-      Dirección:a.calle,
-      Admin:a.esAdmin
+      Email: a.email,
+      Nombre: a.nombre,
+      Apellidos: a.apellidos,
+      DNI: a.dni,
+      Teléfono: a.telefono,
+      Dirección: a.calle,
+      Admin: a.esAdmin
     }));
 
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosExportar);
@@ -62,7 +63,8 @@ export class AsociadosComponent {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
     FileSaver.saveAs(data, `${nombreArchivo}_${new Date().getTime()}.xlsx`);
   }
-  crear(){
-    const dialogRef = this.dialog.open(CrearRegistroComponent, {data: {}})
+  crear() {
+    const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
+    dialogRef.afterClosed().subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
   }
 }

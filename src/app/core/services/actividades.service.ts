@@ -18,4 +18,12 @@ export class ActividadesService {
   getActividad(codigo:string){
     return this.http.get<Actividad>(`${BASE_URL}/id/${codigo}`)
   }
+
+  postActividad(body: any){
+    return this.http.post(`${BASE_URL}/nuevo`, body)
+  }
+
+  deleteActividad(codigo: string){
+    return this.http.delete(`${BASE_URL}/borrar/${codigo}`)
+  }
 }

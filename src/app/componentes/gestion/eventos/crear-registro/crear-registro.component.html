@@ -1,4 +1,55 @@
 <h1 mat-dialog-title>Nuevo registro</h1>
 <div mat-dialog-content>
+    <form [formGroup]="actividadForm" (ngSubmit)="onSubmit(actividadForm)">
+        <mat-form-field>
+            <mat-label>codigo</mat-label>
+            <input matInput formControlName="codigo">
+        </mat-form-field>
 
+        <mat-form-field>
+            <mat-label>titulo</mat-label>
+            <input matInput formControlName="titulo" required>
+            <mat-error *ngIf="actividadForm.get('titulo')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>descripcion</mat-label>
+            <input matInput formControlName="descripcion" required>
+            <mat-error *ngIf="actividadForm.get('descripcion')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Fecha</mat-label>
+            <input matInput [matDatepicker]="fecha" formControlName="fecha">
+            <mat-datepicker-toggle matIconSuffix [for]="fecha"></mat-datepicker-toggle>
+            <mat-datepicker #fecha></mat-datepicker>
+        </mat-form-field>
+        
+        <mat-form-field>
+            <mat-label>tipo</mat-label>
+            <input matInput formControlName="tipo" required>
+            <mat-error *ngIf="actividadForm.get('tipo')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Dirección</mat-label>
+            <input matInput formControlName="direccion" required>
+            <mat-error *ngIf="actividadForm.get('direccion')?.hasError('required')">Tienes que introducir un
+                valor</mat-error>
+        </mat-form-field>
+
+        <mat-checkbox formControlName="reservable">Reservable</mat-checkbox>
+
+        <mat-checkbox formControlName="editando">Editando</mat-checkbox>
+
+
+        <div style="margin-top: 16px;">
+            <button mat-raised-button color="primary" type="submit" [disabled]="actividadForm.invalid">
+                Guardar
+            </button>
+        </div>
+    </form>
 </div>

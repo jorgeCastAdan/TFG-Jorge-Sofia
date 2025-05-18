@@ -22,4 +22,8 @@ export class UsuarioService {
   getAllUsuarios(){
     return this.http.get<Usuario[]>(BASE_URL)
   }
+
+  deleteUsuario(email:string){
+    return this.http.delete(`${BASE_URL}/borrar/${email}`)
+  }
 }

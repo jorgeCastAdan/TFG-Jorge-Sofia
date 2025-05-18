@@ -19,7 +19,13 @@
         <p>{{actividad.direccion}}</p>
         
         @if(actividad.reservable){
-            <button (click)="participar()">Participar</button> 
+            @if(participando){
+                <button (click)="dejarDeParticipar()">Dejar de participar</button>
+            }
+            @else {
+                <button (click)="participar()">Participar</button> 
+            }
+
         }
     </div>
 </div>

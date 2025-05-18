@@ -8,6 +8,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver'
 import { EXCEL_TYPE } from '../../../environment/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { CrearRegistroComponent } from './crear-registro/crear-registro.component';
 
 
 @Component({
@@ -20,21 +22,22 @@ import { EXCEL_TYPE } from '../../../environment/environment';
 export class EventosComponent {
 
   actividades!: Actividad[];
-  displayedColumns: string[] = ['acciones', 'codigo', 'titulo', 'tipo', 'fecha', 'direccion', 'reservable', 'asistentes'];
+  displayedColumns: string[] = ['acciones', 'codigo', 'titulo', 'tipo', 'fecha', 'direccion', 'reservable', 'asistentes', 'editando'];
 
-  constructor(private actServicio: ActividadesService) {
+  constructor(private actServicio: ActividadesService,  private dialog: MatDialog) {
     this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades)
   }
 
   seleccionarElm(row: any) {
 
   }
-  borrar(usuario: any) {
-
+  borrar(actividad: any) {
+    this.actServicio.deleteActividad(actividad.codigo).subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades));
   }
 
-  modificar(usuario: any) {
-
+  modificar(actividad: any) {
+    const dialogRef = this.dialog.open(CrearRegistroComponent, { data: actividad })
+    dialogRef.afterClosed().subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades))
   }
 
   exportarExcel() {
@@ -63,6 +66,7 @@ export class EventosComponent {
   }
 
   crear(){
-    
+    const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
+    dialogRef.afterClosed().subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades))
   }
 }

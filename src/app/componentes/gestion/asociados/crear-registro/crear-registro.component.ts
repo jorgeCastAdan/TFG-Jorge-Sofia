@@ -24,14 +24,13 @@ export class CrearRegistroComponent {
   usuarioIncorrecto: boolean = false;
 
   constructor(private fb: FormBuilder, private usService: UsuarioService, private dialogRef: MatDialogRef<CrearRegistroComponent>) {
-    console.log(this.data)
     if (this.data !== undefined) {
       this.usuarioForm = this.fb.group({
         nombre: [this.data.nombre, Validators.required],
         apellidos: [this.data.apellidos, Validators.required],
         telefono: [this.data.telefono, Validators.required],
         dni: [this.data.dni, Validators.required],
-        email: [{value: this.data.email, disabled:true}, [Validators.required, Validators.email]],
+        email: [{ value: this.data.email, disabled: true }, [Validators.required, Validators.email]],
         direccion: [this.data.calle, Validators.required],
         contraseña: [this.data.contrasena, Validators.required],
         esAdmin: [this.data.esAdmin]
@@ -60,14 +59,27 @@ export class CrearRegistroComponent {
       calle: form.value.direccion,
       contrasena: form.value.contraseña,
       telefono: form.value.telefono,
-      dni: form.value.dni
+      dni: form.value.dni,
+      esAdmin: form.value.esAdmin
     }
 
-    this.usService.getUsuario(usuario.email).subscribe({
-      next: () => {
-       this.usuarioIncorrecto = true;
-      },
-      error: () => { this.usService.postUsuario(usuario); this.dialogRef.close(this.usuarioForm.value) }
-    })
+    if(usuario.esAdmin == ''){
+      usuario.esAdmin = false
+    }
+
+    if (usuario.email == undefined) {
+      usuario.email = this.data.email;
+      this.usService.postUsuario(usuario).subscribe();
+      this.dialogRef.close(this.usuarioForm.value);
+    }
+    else {
+      this.usService.getUsuario(usuario.email).subscribe({
+        next: () => {
+          this.usuarioIncorrecto = true;
+        },
+        error: () => { this.usService.postUsuario(usuario).subscribe(); this.dialogRef.close(this.usuarioForm.value)}
+      })
+    }
+
   }
 }
