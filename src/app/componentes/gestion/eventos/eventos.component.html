@@ -76,3 +76,6 @@
   <tr mat-row (click)="seleccionarElm(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
 
 </table>
+
+<mat-paginator [pageSize]="5" showFirstLastButtons aria-label="Select page of periodic elements">
+</mat-paginator>

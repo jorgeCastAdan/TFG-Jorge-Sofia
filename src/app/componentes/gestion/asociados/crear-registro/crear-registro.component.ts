@@ -33,7 +33,8 @@ export class CrearRegistroComponent {
         email: [{ value: this.data.email, disabled: true }, [Validators.required, Validators.email]],
         direccion: [this.data.calle, Validators.required],
         contraseña: [this.data.contrasena, Validators.required],
-        esAdmin: [this.data.esAdmin]
+        esAdmin: [this.data.esAdmin],
+        pagado: [this.data.pagado]
       });
     }
     else {
@@ -45,7 +46,8 @@ export class CrearRegistroComponent {
         email: ['', [Validators.required, Validators.email]],
         direccion: ['', Validators.required],
         contraseña: ['', [Validators.required]],
-        esAdmin: ['']
+        esAdmin: [''],
+        pagado: ['']
       });
     }
 
@@ -60,11 +62,16 @@ export class CrearRegistroComponent {
       contrasena: form.value.contraseña,
       telefono: form.value.telefono,
       dni: form.value.dni,
-      esAdmin: form.value.esAdmin
+      esAdmin: form.value.esAdmin,
+      pagado: form.value.pagado
     }
 
-    if(usuario.esAdmin == ''){
+    if (usuario.esAdmin == '') {
       usuario.esAdmin = false
+    }
+
+    if (usuario.pagado == '') {
+      usuario.pagado = false
     }
 
     if (usuario.email == undefined) {
@@ -77,7 +84,7 @@ export class CrearRegistroComponent {
         next: () => {
           this.usuarioIncorrecto = true;
         },
-        error: () => { this.usService.postUsuario(usuario).subscribe(); this.dialogRef.close(this.usuarioForm.value)}
+        error: () => { this.usService.postUsuario(usuario).subscribe(); this.dialogRef.close(this.usuarioForm.value) }
       })
     }
 

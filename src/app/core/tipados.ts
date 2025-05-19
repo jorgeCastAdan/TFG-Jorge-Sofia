@@ -6,7 +6,8 @@ export type Usuario = {
   email: string,
   calle: string,
   contrasena: string,
-  esAdmin: boolean
+  esAdmin: boolean,
+  pagado: boolean
 }
 
 export type MenuItem = {

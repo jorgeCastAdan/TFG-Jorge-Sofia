@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { ActividadesService } from '../../../core/services/actividades.service';
 import { Actividad } from '../../../core/tipados';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -12,26 +12,39 @@ import { EXCEL_TYPE } from '../../../environment/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearRegistroComponent } from './crear-registro/crear-registro.component';
 import Swal from 'sweetalert2';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule, MatFormFieldModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule, MatFormFieldModule, MatPaginatorModule],
   templateUrl: './eventos.component.html',
   styleUrl: './eventos.component.css'
 })
-export class EventosComponent {
+export class EventosComponent implements AfterViewInit {
 
   dataSource!: MatTableDataSource<Actividad>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   actividades!: Actividad[];
   displayedColumns: string[] = ['acciones', 'codigo', 'titulo', 'tipo', 'fecha', 'direccion', 'reservable', 'asistentes', 'editando'];
 
+  ngAfterViewInit() {
+    this.recuperarActividades();
+  }
+
   constructor(private actServicio: ActividadesService, private dialog: MatDialog) {
+    this.recuperarActividades()
+  }
+
+  recuperarActividades() {
     this.actServicio.getAllActividades().subscribe(actividades => {
       this.actividades = actividades;
       this.dataSource = new MatTableDataSource(this.actividades);
+            this.dataSource.paginator = this.paginator;
+
     })
   }
 
@@ -48,14 +61,14 @@ export class EventosComponent {
       cancelButtonText: "Cerrar"
     }).then(resultado => {
       if (resultado.isConfirmed) {
-        this.actServicio.deleteActividad(actividad.codigo).subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades));
+        this.actServicio.deleteActividad(actividad.codigo).subscribe(() => this.recuperarActividades());
       }
     })
   }
 
   modificar(actividad: any) {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: actividad })
-    dialogRef.afterClosed().subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades))
+    dialogRef.afterClosed().subscribe(() => this.recuperarActividades())
   }
 
   exportarExcel() {
@@ -85,7 +98,7 @@ export class EventosComponent {
 
   crear() {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
-    dialogRef.afterClosed().subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades))
+    dialogRef.afterClosed().subscribe(() => this.recuperarActividades())
   }
 
   filtro(event: string) {

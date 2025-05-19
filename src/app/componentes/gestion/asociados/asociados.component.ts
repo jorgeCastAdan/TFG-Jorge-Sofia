@@ -1,9 +1,10 @@
-import { Component, inject, Injector } from '@angular/core';
+import { AfterViewInit, Component, inject, Injector, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { UsuarioService } from '../../../core/services/usuario.service';
 import { Usuario } from '../../../core/tipados';
 import * as XLSX from 'xlsx';
@@ -15,22 +16,24 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-asociados',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule, MatDialogModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule, MatDialogModule, MatPaginatorModule],
   templateUrl: './asociados.component.html',
   styleUrl: './asociados.component.css'
 })
-export class AsociadosComponent {
+export class AsociadosComponent implements AfterViewInit {
 
-    dataSource!: MatTableDataSource<Usuario>;
+  dataSource!: MatTableDataSource<Usuario>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   asociados!: Usuario[];
-  displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'dni', 'email', 'calle', 'esAdmin'];
+  displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'dni', 'email', 'calle', 'esAdmin', 'pagado'];
+
+  ngAfterViewInit() {
+    this.recuperarUsuarios();
+  }
 
   constructor(private usuService: UsuarioService, private dialog: MatDialog) {
-    this.usuService.getAllUsuarios().subscribe(usuarios => {
-      this.asociados = usuarios;
-      this.dataSource = new MatTableDataSource(this.asociados)
-    })
   }
 
   seleccionarElm(row: any) {
@@ -47,14 +50,22 @@ export class AsociadosComponent {
       cancelButtonText: "Cerrar"
     }).then(resultado => {
       if (resultado.isConfirmed) {
-        this.usuService.deleteUsuario(asociado.codigo).subscribe(() => this.usuService.getAllUsuarios().subscribe(asociados => this.asociados = asociados));
+        this.usuService.deleteUsuario(asociado.email).subscribe(() => this.recuperarUsuarios());
       }
+    })
+  }
+
+  recuperarUsuarios() {
+    this.usuService.getAllUsuarios().subscribe(usuarios => {
+      this.asociados = usuarios;
+      this.dataSource = new MatTableDataSource(this.asociados);
+      this.dataSource.paginator = this.paginator;
     })
   }
 
   modificar(usuario: any) {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: usuario })
-    dialogRef.afterClosed().subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
+    dialogRef.afterClosed().subscribe(() => this.recuperarUsuarios())
   }
 
   exportarExcel() {
@@ -65,7 +76,8 @@ export class AsociadosComponent {
       DNI: a.dni,
       Teléfono: a.telefono,
       Dirección: a.calle,
-      Admin: a.esAdmin
+      Admin: a.esAdmin,
+      Pagado: a.pagado
     }));
 
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosExportar);
@@ -82,9 +94,9 @@ export class AsociadosComponent {
   }
   crear() {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
-    dialogRef.afterClosed().subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
+    dialogRef.afterClosed().subscribe(() => this.recuperarUsuarios())
   }
-  
+
   filtro(event: string) {
     this.dataSource.filter = event.trim().toLowerCase();
   }

@@ -30,7 +30,7 @@ export class ActividadComponent {
       let codigo: string = params.get('codigo')!
       this.actServicio.getActividad(codigo).subscribe(act => {
         this.actividad = act;
-        this.fondoUrl = `/${this.actividad.img}`;
+        this.fondoUrl = `imagenes/${this.actividad.imagen}`;
         if (this.actividad.asistentes) {
           this.participando = this.actividad.asistentes.some(
             (email: string) => email === this.auth.usuario?.email
