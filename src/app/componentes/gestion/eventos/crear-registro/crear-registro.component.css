@@ -2,3 +2,7 @@
     color: rgb(218, 58, 58);
     font-size: small;
 }
+
+mat-form-field{
+    padding: 1%;
+}
