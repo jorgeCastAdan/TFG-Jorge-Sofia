@@ -44,6 +44,10 @@ export class MapaComponent  implements AfterViewInit{
     });
   }
 
+  prueba(event: any){
+    console.log(event)
+  }
+
   inicializarMapa(L: any) {
     const mapContainer = L.DomUtil.get('mapa');
 
