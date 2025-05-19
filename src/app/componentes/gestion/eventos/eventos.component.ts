@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { ActividadesService } from '../../../core/services/actividades.service';
 import { Actividad } from '../../../core/tipados';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver'
 import { EXCEL_TYPE } from '../../../environment/environment';
@@ -16,17 +17,22 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-eventos',
   standalone: true,
-  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule],
+  imports: [MatTableModule, MatIconModule, MatButtonModule, MatMenuModule, MatFormFieldModule],
   templateUrl: './eventos.component.html',
   styleUrl: './eventos.component.css'
 })
 export class EventosComponent {
 
+  dataSource!: MatTableDataSource<Actividad>;
+
   actividades!: Actividad[];
   displayedColumns: string[] = ['acciones', 'codigo', 'titulo', 'tipo', 'fecha', 'direccion', 'reservable', 'asistentes', 'editando'];
 
   constructor(private actServicio: ActividadesService, private dialog: MatDialog) {
-    this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades)
+    this.actServicio.getAllActividades().subscribe(actividades => {
+      this.actividades = actividades;
+      this.dataSource = new MatTableDataSource(this.actividades);
+    })
   }
 
   seleccionarElm(row: any) {
@@ -80,5 +86,9 @@ export class EventosComponent {
   crear() {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
     dialogRef.afterClosed().subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades))
+  }
+
+  filtro(event: string) {
+    this.dataSource.filter = event.trim().toLowerCase();
   }
 }

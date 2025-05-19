@@ -1,5 +1,5 @@
 import { Component, inject, Injector } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
@@ -21,11 +21,16 @@ import Swal from 'sweetalert2';
 })
 export class AsociadosComponent {
 
+    dataSource!: MatTableDataSource<Usuario>;
+
   asociados!: Usuario[];
   displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'dni', 'email', 'calle', 'esAdmin'];
 
   constructor(private usuService: UsuarioService, private dialog: MatDialog) {
-    this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios)
+    this.usuService.getAllUsuarios().subscribe(usuarios => {
+      this.asociados = usuarios;
+      this.dataSource = new MatTableDataSource(this.asociados)
+    })
   }
 
   seleccionarElm(row: any) {
@@ -78,5 +83,9 @@ export class AsociadosComponent {
   crear() {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
     dialogRef.afterClosed().subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
+  }
+  
+  filtro(event: string) {
+    this.dataSource.filter = event.trim().toLowerCase();
   }
 }

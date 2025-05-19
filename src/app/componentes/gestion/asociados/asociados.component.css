@@ -1,3 +1,13 @@
 .mat-mdc-row:hover .mat-mdc-cell {
   background-color: rgb(204, 204, 204);
 }
+
+.buscador{
+  width: 30%;
+  border-color: rgb(199, 199, 199);
+  margin: 1%;
+}
+
+.buscador-container{
+  width: 100%;
+}
