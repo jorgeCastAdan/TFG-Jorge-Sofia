@@ -32,7 +32,7 @@ export type LugarInteres = {
 export type Info = {
   codigo: string,
   descripcion: string,
-  img: string,
+  imagen: string,
   titulo: string
 }
 
