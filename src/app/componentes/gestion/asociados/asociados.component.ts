@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx';
 import * as FileSaver from 'file-saver'
 import { EXCEL_TYPE } from '../../../environment/environment'
 import { CrearRegistroComponent } from './crear-registro/crear-registro.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-asociados',
@@ -31,8 +32,19 @@ export class AsociadosComponent {
 
   }
 
-  borrar(usuario: any) {
-    this.usuService.deleteUsuario(usuario.email).subscribe(() => this.usuService.getAllUsuarios().subscribe(usuarios => this.asociados = usuarios))
+  borrar(asociado: any) {
+    Swal.fire({
+      title: "Borrar",
+      text: "¿Está seguro que quiere borrar este asociado?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cerrar"
+    }).then(resultado => {
+      if (resultado.isConfirmed) {
+        this.usuService.deleteUsuario(asociado.codigo).subscribe(() => this.usuService.getAllUsuarios().subscribe(asociados => this.asociados = asociados));
+      }
+    })
   }
 
   modificar(usuario: any) {

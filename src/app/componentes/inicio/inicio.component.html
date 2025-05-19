@@ -10,7 +10,7 @@
         <ng-container *ngFor="let item of informacion">
             <swiper-slide>
                 <div class="contenido-slide">
-                    <img src="imagenes\pexels-markusspiske-102726.jpg" (click)="mostrarItem(item.titulo)">
+                    <img src="{{item.img}}" (click)="mostrarItem(item.titulo)">
                     <h2 class="texto-slide">{{item.titulo}}</h2>
                 </div>
             </swiper-slide>
@@ -23,7 +23,7 @@
                 <mat-card-header>
                     <mat-card-title>{{item.titulo}}</mat-card-title>
                 </mat-card-header>
-                <img mat-card-image src="imagenes\pexels-markusspiske-102726.jpg" class="imgItem">
+                <img mat-card-image src="{{item.img}}" class="imgItem">
                 <mat-card-content>
                     <p>
                         {{item.descripcion}}

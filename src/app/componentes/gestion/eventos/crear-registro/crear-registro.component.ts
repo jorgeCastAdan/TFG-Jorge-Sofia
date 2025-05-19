@@ -10,7 +10,7 @@ import { MatTimepickerModule } from '@angular/material/timepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgIf } from '@angular/common';
+import { formatDate, NgIf } from '@angular/common';
 import { v4 } from 'uuid'
 import { ActividadesService } from '../../../../core/services/actividades.service';
 
@@ -59,7 +59,7 @@ export class CrearRegistroComponent {
   }
 
   onSubmit(form: FormGroup) {
-    let actividad = {
+    let actividad: any = {
       titulo: form.value.titulo,
       descripcion: form.value.descripcion,
       tipo: form.value.tipo,
@@ -67,7 +67,14 @@ export class CrearRegistroComponent {
       codigo: form.value.codigo,
       reservable: form.value.reservable,
       direccion: form.value.direccion,
-      editando: form.value.editando
+      editando: form.value.editando,
+    }
+
+    if (this.data) {
+      actividad.asistentes = this.data.asistentes
+    }
+    else {
+      actividad.asistentes = []
     }
 
     if (actividad.editando == '') {
@@ -79,9 +86,7 @@ export class CrearRegistroComponent {
     }
 
     const fechaOriginal: Date = actividad.fecha;
-    const fechaFormateada = fechaOriginal.toISOString().split('T')[0];
-    actividad.fecha = fechaFormateada;
-
+    actividad.fecha = formatDate(fechaOriginal, 'yyyy-MM-dd', 'es-ES');
 
     if (this.codigoAct !== null) {
       actividad.codigo = this.codigoAct;

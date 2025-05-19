@@ -10,6 +10,7 @@ import * as FileSaver from 'file-saver'
 import { EXCEL_TYPE } from '../../../environment/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearRegistroComponent } from './crear-registro/crear-registro.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class EventosComponent {
   actividades!: Actividad[];
   displayedColumns: string[] = ['acciones', 'codigo', 'titulo', 'tipo', 'fecha', 'direccion', 'reservable', 'asistentes', 'editando'];
 
-  constructor(private actServicio: ActividadesService,  private dialog: MatDialog) {
+  constructor(private actServicio: ActividadesService, private dialog: MatDialog) {
     this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades)
   }
 
@@ -32,7 +33,18 @@ export class EventosComponent {
 
   }
   borrar(actividad: any) {
-    this.actServicio.deleteActividad(actividad.codigo).subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades));
+    Swal.fire({
+      title: "Borrar",
+      text: "¿Está seguro que quiere borrar esta actividad?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Borrar",
+      cancelButtonText: "Cerrar"
+    }).then(resultado => {
+      if (resultado.isConfirmed) {
+        this.actServicio.deleteActividad(actividad.codigo).subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades));
+      }
+    })
   }
 
   modificar(actividad: any) {
@@ -42,14 +54,14 @@ export class EventosComponent {
 
   exportarExcel() {
     let datosExportar = this.actividades.map(a => ({
-      Código:a.codigo,
+      Código: a.codigo,
       Titulo: a.titulo,
-      Asistentes:a.asistentes.length,
-      Descripción:a.descripcion,
-      Reservale:a.reservable,
-      Tipo:a.tipo,
-      Fecha:a.fecha,
-      Dirección:a.direccion
+      Asistentes: a.asistentes.length,
+      Descripción: a.descripcion,
+      Reservale: a.reservable,
+      Tipo: a.tipo,
+      Fecha: a.fecha,
+      Dirección: a.direccion
     }));
 
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(datosExportar);
@@ -65,7 +77,7 @@ export class EventosComponent {
     FileSaver.saveAs(data, `${nombreArchivo}_${new Date().getTime()}.xlsx`);
   }
 
-  crear(){
+  crear() {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
     dialogRef.afterClosed().subscribe(() => this.actServicio.getAllActividades().subscribe(actividades => this.actividades = actividades))
   }
