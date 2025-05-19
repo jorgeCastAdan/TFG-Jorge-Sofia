@@ -1,5 +1,5 @@
 @if(data){
-    <app-mapa [marcadores]="data" (pulsarMarcador)="irAtextoMarcador($event)"></app-mapa>
+    <app-mapa [marcadores]="data" (pulsarMarcador)="irAtextoMarcador($event)" ></app-mapa>
 }
 <div class="contenido">
     <ng-container *ngFor="let marcador of data">

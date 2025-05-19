@@ -1,16 +1,19 @@
 import { Component} from '@angular/core';
 import { MapaComponent } from "./mapa/mapa.component";
-import { MenuService } from '../../core/services/menu-service.service';
+import { CommonModule } from '@angular/common';
 import { LugarInteres } from '../../core/tipados';
 import { NgFor } from '@angular/common';
 import {MatCardModule} from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon'
 import { SitiosInteresService } from '../../core/services/sitios-interes.service';
 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-sitios-interes',
   standalone:true,
-  imports: [MapaComponent, NgFor, MatCardModule, MatIconModule],
+  imports: [MapaComponent, NgFor, MatCardModule, MatIconModule, CommonModule, NgFor, ReactiveFormsModule, MatFormFieldModule],
   templateUrl: './sitios-interes.component.html',
   styleUrl: './sitios-interes.component.css'
 })

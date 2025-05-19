@@ -15,4 +15,8 @@ export class SitiosInteresService {
     return this.http.get<LugarInteres[]>(`${BASE_URL}`)
   }
 
+  getSitio(codigo:string){
+    return this.http.get<LugarInteres>(`${BASE_URL}/id/${codigo}`)
+  }
+
 }

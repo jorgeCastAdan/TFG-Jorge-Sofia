@@ -19,7 +19,7 @@ export type MenuItem = {
 }
 
 export type LugarInteres = {
-  id: number
+  codigo: number
   lugar: string
   longitud: number
   latitud: number

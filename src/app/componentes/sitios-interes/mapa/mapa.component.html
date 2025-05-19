@@ -1,5 +1,36 @@
-<div class="mapa-contenedor">
+@if(marcadores){
+  <div class="mapa-contenedor">
     <div class="mapa-frame">
       <div id="mapa" (click)="prueba($event)"></div>
     </div>
-</div>
+  </div>
+
+  <form [formGroup]="formMapa" (ngSubmit)="onSubmit(formMapa)">
+
+    <mat-form-field>
+      <mat-label>Origen</mat-label>
+      <input matInput formControlName="origen" required>
+      <mat-error *ngIf="formMapa.get('origen')?.hasError('required')">Tienes que introducir un
+        valor</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Destino</mat-label>
+      <mat-select formControlName="destino">
+        <mat-option *ngFor="let marcador of marcadores; trackBy: trackByCodigo" [value]="marcador.codigo">
+          {{ marcador.lugar }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="formMapa.invalid">
+      Buscar
+    </button>
+    @if(direccionNoEncontrada){
+      <div>
+        La dirección no se ha encontrado
+      </div>
+    }
+
+  </form>
+}
