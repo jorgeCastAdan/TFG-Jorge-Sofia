@@ -44,7 +44,7 @@ export type Actividad = {
   reservable: boolean,
   titulo: string,
   tipo: string,
-  img: string,
+  imagen: string,
   fecha: string,
   direccion: string
 }
