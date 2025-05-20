@@ -13,6 +13,9 @@ type Usuario = FormGroup<{
   contraseña: FormControl<string | null>;
 }>
 
+/**
+ * Clase con la funcionalidad y elementos responsales del inicio de sesion
+ */
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -41,6 +44,12 @@ export class LoginComponent {
     
   }
 
+  /**
+   * Comprueba que el email exista en base de datos y en caso de existir comprueba si la contraseña esta bien,
+   * en caso correcto se crea una sesion con su token y se redirige a la pestaña principal,
+   * en caso contrario se notifica al usuario por pantalla
+   * @param form objeto con los datos del formulario
+   */
   logIn(form: Usuario) {
 
     this.usuarioIncorrecto = false;

@@ -18,6 +18,9 @@ type UsuarioForm = FormGroup<{
   contraseña: FormControl<string | null>;
 }>
 
+/**
+ * Componante con las funcionalidades y los elementos responsales del registro de un nuevo usuario
+ */
 @Component({
   selector: 'app-registrarse',
   standalone:true,
@@ -43,6 +46,12 @@ export class RegistrarseComponent {
     })
   }
 
+  /**
+   * Compruea que el email exista en base de datos,
+   * en caso de que exista se notifica al usuario para que modifique el email,
+   * en el caso de que no exista crea al usuario con los datos rellenados, crea la sesion correspondiente y redirige la ventana a la raiz '/'
+   * @param form objeto con los datos del formulario
+   */
   registrarse(form: UsuarioForm) {
     if(this.usuarioExistente){
       this.usuarioExistente = !this.usuarioExistente

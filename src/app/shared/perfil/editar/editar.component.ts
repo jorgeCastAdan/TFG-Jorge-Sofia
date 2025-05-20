@@ -17,7 +17,9 @@ type UsuarioForm = FormGroup<{
   contraseña: FormControl<string | null>;
 }>
 
-
+/**
+ * Compoente con los elementos y la funcionalidad responsables de editar el perfil de un usuario registrado
+ */
 @Component({
   selector: 'app-editar',
   standalone:true,
@@ -46,6 +48,10 @@ export class EditarComponent {
   usuarioForm! : UsuarioForm;
   hide: boolean = true;
 
+  /**
+   * Modifica el usuario en la ase de datos en funcion de los datos del formulario y redirige la pagina a la raiz '/'
+   * @param form objeto con los datos del forulario
+   */
   guardar(form: UsuarioForm) {
     let usuario = {
       email:form.value.email,
