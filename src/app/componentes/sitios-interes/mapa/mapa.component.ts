@@ -4,10 +4,10 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID, Input, Output, EventEmit
 import { LugarInteres } from '../../../core/tipados';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { SitiosInteresService } from '../../../core/services/sitios-interes.service';
-import { parse } from 'path';
 
 const centradoInicial = {
   latitud: 42.37348279273548,
@@ -20,7 +20,7 @@ const centradoInicial = {
 @Component({
   selector: 'app-mapa',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, NgIf, MatInputModule, MatSelectModule, CommonModule, NgFor],
+  imports: [ReactiveFormsModule, MatFormFieldModule, NgIf, MatInputModule, MatSelectModule, CommonModule, NgFor, MatIconModule],
   templateUrl: './mapa.component.html',
   styleUrl: './mapa.component.css'
 })
@@ -29,7 +29,9 @@ export class MapaComponent implements AfterViewInit {
 
   direccionNoEncontrada: boolean = false;
 
-  leaflet: any;
+  private leaflet: any;
+
+  private ruta: any;
 
   @Input({ required: true }) marcadores!: LugarInteres[];
 
@@ -37,7 +39,7 @@ export class MapaComponent implements AfterViewInit {
 
   formMapa: FormGroup;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private lugService:SitiosInteresService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private lugService: SitiosInteresService) {
     this.formMapa = this.fb.group({
       origen: ['', Validators.required],
       destino: ['', Validators.required]
@@ -45,19 +47,26 @@ export class MapaComponent implements AfterViewInit {
   }
 
   onSubmit(form: any) {
+    if (this.ruta) {
+      this.mapa.removeControl(this.ruta)
+      this.ruta = null
+    }
     this.lugService.getSitio(form.value.destino).subscribe(sitio => {
       const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(form.value.origen)}`;
 
       fetch(url).then(res => res.json()).then(data => {
-        if(data.length > 0){
-          this.leaflet.Routing.control({
+        if (data.length > 0) {
+          this.ruta = this.leaflet.Routing.control({
             waypoints: [
-              this.leaflet.latlng(sitio.latitud, sitio.longitud),
-              this.leaflet.latlng(parseFloat(data[0].lat), parseFloat(data[0].lon))
-            ]
+              this.leaflet.latLng(parseFloat(data[0].lat), parseFloat(data[0].lon)),
+              this.leaflet.latLng(sitio.latitud, sitio.longitud)
+            ],
+            addWaypoints: false,
+            draggableWaypoints: false,
+            show: false,
           }).addTo(this.mapa)
         }
-        else{
+        else {
           this.direccionNoEncontrada = true
         }
       });
@@ -68,29 +77,28 @@ export class MapaComponent implements AfterViewInit {
     return item.codigo;
   }
 
+  refrescar() {
+    if (this.ruta) {
+      this.mapa.removeControl(this.ruta)
+      this.ruta = null
+    }
+  }
+
 
   /**
    * El uso de isPlatformrowser se asegura que leaflet solo se importe
    * y se cargue cuando la aplicacion esta en el lado del cliente. Asi se evita el error
    * de 'ReferenceError: window is not defined' que salta si leaflet se carga en el servidor
    */
-  ngAfterViewInit(): void {
+  async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.inicializarLeaflet();
-    }
-  }
+      let L = await import('leaflet');
+      (window as any).L = L;
+      await import('leaflet-routing-machine');
 
-  inicializarLeaflet() {
-    import('leaflet').then((L) => {
-      this.leaflet = L
+      this.leaflet = L;
       this.inicializarMapa(L);
-    }).catch(err => {
-      console.error('Error al cargar Leaflet:', err);
-    });
-  }
-
-  prueba(event: any) {
-    console.log(event)
+    }
   }
 
   inicializarMapa(L: any) {

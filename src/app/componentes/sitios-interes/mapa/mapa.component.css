@@ -2,8 +2,8 @@
   height: 50%;
   width: 50%;
   position: absolute;
-  top: 0;
-  left: 25%;
+  top: 1.75%;
+  left: 1%;
   right: 0;
   bottom: 0;
   margin: 30px;
@@ -16,4 +16,27 @@
   
 #mapa {
   height: 100%;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-top: 3%;
+  margin-left: 60%;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  height: fit-content; 
+}
+
+.contenido{
+  display: flex;
+  flex-direction: row;
+}
+
+.refrescar{
+  margin-top: 2.75%;
+  margin-left: 53%;
 }
