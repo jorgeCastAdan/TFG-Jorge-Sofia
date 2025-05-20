@@ -6,12 +6,19 @@ import { LugarInteres, MenuItem } from '../tipados';
 @Injectable({
   providedIn: 'root'
 })
+/**
+ * Clase responsale de obtener la iformacion del menu guardada en un json
+ */
 export class MenuService {
 
   private path = `./menu.json`;
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Obtiene el archivo json de la carpeta public que se llame menu.json
+   * @returns Observable con el archivo en el caso de que exista
+   */
   recuperarMenu(): Observable<MenuItem[]>{
     return this.http.get<MenuItem[]>(this.path);
   }
