@@ -8,6 +8,9 @@ import { MenuService } from '../../core/services/menu-service.service';
 import { NgFor } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 
+/**
+ * Componente ase de la web con los elementos que estan presentes siempre
+ */
 @Component({
   selector: 'app-componente-base',
   standalone: true,
@@ -28,14 +31,24 @@ export class ComponenteBaseComponent{
     this.auth.usuario$.subscribe(us => this.usuario = us);
   }
 
+  /**
+   * Abre el menu lateral
+   */
   abrirMenu() {
     this.drawer.toggle()
   }
 
+  /**
+   * Cierra el menu lateral en caso de estar abierto
+   */
   cerrarMenu() {
     this.drawer.close()
   }
 
+  /**
+   * Cambia la ruta interna de la web (url)
+   * @param ruta ruta a la que va anavegar la web
+   */
   cambiarRuta(ruta: any) {
     this.router.navigate([ruta]);
     this.drawer.close();
