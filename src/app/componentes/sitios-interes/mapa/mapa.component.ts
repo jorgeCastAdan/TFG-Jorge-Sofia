@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { SitiosInteresService } from '../../../core/services/sitios-interes.service';
+import { LeafletLoaderService } from '../../../core/services/leaflet-loader.service';
 
 const centradoInicial = {
   latitud: 42.37348279273548,
@@ -39,7 +40,7 @@ export class MapaComponent implements AfterViewInit {
 
   formMapa: FormGroup;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private lugService: SitiosInteresService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private fb: FormBuilder, private lugService: SitiosInteresService, private leafletService: LeafletLoaderService) {
     this.formMapa = this.fb.group({
       origen: ['', Validators.required],
       destino: ['', Validators.required]
@@ -47,6 +48,7 @@ export class MapaComponent implements AfterViewInit {
   }
 
   onSubmit(form: any) {
+    this.direccionNoEncontrada = false
     if (this.ruta) {
       this.mapa.removeControl(this.ruta)
       this.ruta = null
@@ -92,12 +94,12 @@ export class MapaComponent implements AfterViewInit {
    */
   async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      let L = await import('leaflet');
-      (window as any).L = L;
-      await import('leaflet-routing-machine');
+      const L = await this.leafletService.loadLeaflet();
 
-      this.leaflet = L;
-      this.inicializarMapa(L);
+      if (L) {
+        this.leaflet = L;
+        this.inicializarMapa(L);
+      }
     }
   }
 
