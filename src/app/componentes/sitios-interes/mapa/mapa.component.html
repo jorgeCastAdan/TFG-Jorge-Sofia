@@ -1,42 +1,41 @@
-@if(marcadores){
-  <button mat-fab (click)="refrescar()" class="refrescar">
-    <mat-icon>refresh</mat-icon>
-  </button>
-  <div class="contenido">
-    <div class="mapa-contenedor">
-      <div class="mapa-frame">
-        <div id="mapa"></div>
-      </div>
+
+<button mat-fab (click)="refrescar()" class="refrescar">
+  <mat-icon>refresh</mat-icon>
+</button>
+<div class="contenido">
+  <div class="mapa-contenedor">
+    <div class="mapa-frame">
+      <div id="mapa"></div>
     </div>
-
-
-    <form [formGroup]="formMapa" (ngSubmit)="onSubmit(formMapa)">
-
-      <mat-form-field>
-        <mat-label>Origen</mat-label>
-        <input matInput formControlName="origen" required>
-        <mat-error *ngIf="formMapa.get('origen')?.hasError('required')">Tienes que introducir un
-          valor</mat-error>
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Destino</mat-label>
-        <mat-select formControlName="destino">
-          <mat-option *ngFor="let marcador of marcadores; trackBy: trackByCodigo" [value]="marcador.codigo">
-            {{ marcador.lugar }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <button mat-raised-button color="primary" type="submit" [disabled]="formMapa.invalid" class="submit">
-        Buscar
-      </button>
-      @if(direccionNoEncontrada){
-      <div class="texto-error">
-        La dirección no se ha encontrado
-      </div>
-      }
-
-    </form>
   </div>
-}
+
+
+  <form [formGroup]="formMapa" (ngSubmit)="onSubmit(formMapa)">
+
+    <mat-form-field>
+      <mat-label>Origen</mat-label>
+      <input matInput formControlName="origen" required>
+      <mat-error *ngIf="formMapa.get('origen')?.hasError('required')">Tienes que introducir un
+        valor</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Destino</mat-label>
+      <mat-select formControlName="destino">
+        <mat-option *ngFor="let marcador of marcadores; trackBy: trackByCodigo" [value]="marcador.codigo">
+          {{ marcador.lugar }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="formMapa.invalid" class="submit">
+      Buscar
+    </button>
+    @if(direccionNoEncontrada){
+    <div class="texto-error">
+      La dirección no se ha encontrado
+    </div>
+    }
+
+  </form>
+</div>
