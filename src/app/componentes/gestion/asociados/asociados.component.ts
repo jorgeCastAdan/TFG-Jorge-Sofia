@@ -13,6 +13,9 @@ import { EXCEL_TYPE } from '../../../environment/environment'
 import { CrearRegistroComponent } from './crear-registro/crear-registro.component';
 import Swal from 'sweetalert2';
 
+/**
+ * Componente correspondiente a la vista de los asociados dentro de gestión
+ */
 @Component({
   selector: 'app-asociados',
   standalone: true,
@@ -36,10 +39,10 @@ export class AsociadosComponent implements AfterViewInit {
   constructor(private usuService: UsuarioService, private dialog: MatDialog) {
   }
 
-  seleccionarElm(row: any) {
-
-  }
-
+  /**
+   * cuando se pulsa la opcion de borrar en un asociado. Salta un popup para confirmar la decisión, en caso afirmativo modifica los datos en la base de datos y refresca los datos de la tabla
+   * @param asociado Asociado que se quiere eliminar
+   */
   borrar(asociado: any) {
     Swal.fire({
       title: "Borrar",
@@ -55,6 +58,9 @@ export class AsociadosComponent implements AfterViewInit {
     })
   }
 
+  /**
+   * recupera todos los usuarios de la base de datos mediante el uso del servicio de usuarios. Luego crea la tabla usando eson datos como base y le añade un paginator
+   */
   recuperarUsuarios() {
     this.usuService.getAllUsuarios().subscribe(usuarios => {
       this.asociados = usuarios;
@@ -63,11 +69,18 @@ export class AsociadosComponent implements AfterViewInit {
     })
   }
 
+  /**
+   * Cuando se pulsa la opcion de editar de un asociado se crea un popup con un formulario con los datos del usuario a editar
+   * @param usuario 
+   */
   modificar(usuario: any) {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: usuario })
     dialogRef.afterClosed().subscribe(() => this.recuperarUsuarios())
   }
 
+  /**
+   * Al pulsar en excel descarga en el equipo un excel con los datos de todos los asociados de la base de datos
+   */
   exportarExcel() {
     let datosExportar = this.asociados.map(a => ({
       Email: a.email,
@@ -88,15 +101,28 @@ export class AsociadosComponent implements AfterViewInit {
     this.guardarArchivo(excelBuffer, 'asociados');
   }
 
+  /**
+   * Guarda el archivo en el equipo con un nombre en especifico
+   * @param buffer 
+   * @param nombreArchivo nomre con el que se va a descargar el archivo
+   */
   private guardarArchivo(buffer: any, nombreArchivo: string): void {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
     FileSaver.saveAs(data, `${nombreArchivo}_${new Date().getTime()}.xlsx`);
   }
+
+  /**
+   * Al pulsar en crear, aparece un popup con un formulario con los campos para crear un nuevo usuario
+   */
   crear() {
     const dialogRef = this.dialog.open(CrearRegistroComponent, { data: undefined })
     dialogRef.afterClosed().subscribe(() => this.recuperarUsuarios())
   }
 
+  /**
+   * Sirve para filtrar los datos de la tabla mediante el input de un buscador
+   * @param event el input del buscador
+   */
   filtro(event: string) {
     this.dataSource.filter = event.trim().toLowerCase();
   }

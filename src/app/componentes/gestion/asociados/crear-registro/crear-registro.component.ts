@@ -9,6 +9,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { UsuarioService } from '../../../../core/services/usuario.service';
 import { NgIf } from '@angular/common';
 
+/**
+ * Componente con un formulario con los datos correspondientes a un asociado para crear o modificar uno de ellos
+ */
 @Component({
   selector: 'app-crear-registro',
   standalone: true,
@@ -53,6 +56,10 @@ export class CrearRegistroComponent {
 
   }
 
+  /**
+   * Al realizar submit en el formulario, comprueba si el email es undefined, en caso afirmativo le asigna valor y se realiza una actualización. Si no es undefined, comprueba si ya existe y si no existe, realiza un inser en la base de datos. 
+   * @param form 
+   */
   onSubmit(form: FormGroup) {
     let usuario = {
       email: form.value.email,

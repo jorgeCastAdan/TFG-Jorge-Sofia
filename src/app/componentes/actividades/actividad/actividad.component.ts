@@ -6,6 +6,9 @@ import Swal from 'sweetalert2';
 import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../core/services/auth.service';
 
+/**
+ * Componente correspondiente de la vista de una actividad en especifico
+ */
 @Component({
   selector: 'app-actividad',
   standalone: true,
@@ -41,6 +44,9 @@ export class ActividadComponent {
 
   }
 
+  /**
+   * Al pulsar esta opcion se muestra un popup para confirmar la participacion, en caso afirmativo, se guarda dicha participacion en la base de datos y se redirige la ventana a todas las actividades de nuevo
+   */
   participar() {
     Swal.fire({
       title: "Participación",
@@ -61,6 +67,9 @@ export class ActividadComponent {
     })
   }
 
+  /**
+   * En caso de que el usuario ya este participando en esta actividad, aparecera la opcion de dejar de participar. En caso de pulsar esta opcion, salta un popup para confirmar la decisión y en caso afirmativo modifica los datos en base de datos y redirige a la pestaña con todas las actividades
+   */
   dejarDeParticipar() {
     Swal.fire({
       title: "Participación",

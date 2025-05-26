@@ -1,5 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
+/**
+ * Tuberia para poder recortar un texto si es mas grande de 75 caracteres
+ */
 @Pipe({
   name: 'cortarDesc'
 })

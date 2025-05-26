@@ -14,6 +14,9 @@ import { formatDate, NgIf } from '@angular/common';
 import { v4 } from 'uuid'
 import { ActividadesService } from '../../../../core/services/actividades.service';
 
+/**
+ * Componente con un formulario con los datos correspondientes a una actividad para crear o modificar una de ellas
+ */
 @Component({
   selector: 'app-crear-registro',
   standalone: true,
@@ -58,6 +61,10 @@ export class CrearRegistroComponent {
 
   }
 
+  /**
+   * Al realizar submit en el formulario, comprueba si el codigo de la actividad es null, en caso afirmativo le asigna valor y se realiza una actualización. Si no es null, se le asigna un valor creado automaticamente al codigo y se realiza un insert. 
+   * @param form 
+   */
   onSubmit(form: FormGroup) {
     let actividad: any = {
       titulo: form.value.titulo,

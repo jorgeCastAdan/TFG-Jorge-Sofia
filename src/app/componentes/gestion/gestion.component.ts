@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {MatTabsModule} from '@angular/material/tabs';
 
+/**
+ * Componente responsable de la vista de la pestaña principal de gestión
+ */
 @Component({
   selector: 'app-gestion',
   standalone:true,

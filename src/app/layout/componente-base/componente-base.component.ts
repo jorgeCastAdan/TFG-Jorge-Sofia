@@ -9,7 +9,7 @@ import { NgFor } from '@angular/common';
 import { AuthService } from '../../core/services/auth.service';
 
 /**
- * Componente ase de la web con los elementos que estan presentes siempre
+ * Componente base de la web con los elementos que estan presentes siempre
  */
 @Component({
   selector: 'app-componente-base',

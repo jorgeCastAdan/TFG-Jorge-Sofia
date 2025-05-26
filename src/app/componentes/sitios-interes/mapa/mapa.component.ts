@@ -17,7 +17,9 @@ const centradoInicial = {
 };
 
 
-
+/**
+ * Componente en el que se crea el mapa de leaflet
+ */
 @Component({
   selector: 'app-mapa',
   standalone: true,
@@ -47,6 +49,10 @@ export class MapaComponent implements AfterViewInit {
     })
   }
 
+  /**
+   * Metodo que se realiza al hacer submit en el pequeño formulario para buscar una ruta de un punto x a un punto marcado en el mapa
+   * @param form los datos del formulario
+   */
   onSubmit(form: any) {
     this.direccionNoEncontrada = false
     if (this.ruta) {
@@ -75,10 +81,19 @@ export class MapaComponent implements AfterViewInit {
     })
   }
 
+  /**
+   * sirve para poder tracker por el codigo de los marcadores en un for dentro del html
+   * @param index 
+   * @param item el item que se quiere trackear
+   * @returns devuelve el codigo del item
+   */
   trackByCodigo(index: number, item: any) {
     return item.codigo;
   }
 
+  /**
+   * Metodo para realizar un borrado de la ruta en el mapa
+   */
   refrescar() {
     if (this.ruta) {
       this.mapa.removeControl(this.ruta)
@@ -88,9 +103,7 @@ export class MapaComponent implements AfterViewInit {
 
 
   /**
-   * El uso de isPlatformrowser se asegura que leaflet solo se importe
-   * y se cargue cuando la aplicacion esta en el lado del cliente. Asi se evita el error
-   * de 'ReferenceError: window is not defined' que salta si leaflet se carga en el servidor
+   * Metodo que se ejecuta una vez la vista de los componente sse inicialice, si se esta en el lado del clente (isPlatformBrowser(this.platformId)), inicializa el mapa
    */
   async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
@@ -103,6 +116,10 @@ export class MapaComponent implements AfterViewInit {
     }
   }
 
+  /**
+   * Metodo responsable de inicializar el mapa de leaflet. Si ya existe un mapa, lo elimina y lo vuelve a crear y le añade los marcadores recuperados de la base de datos
+   * @param L El resultado del import de leaflet mediante un servicio
+   */
   inicializarMapa(L: any) {
     const mapContainer = L.DomUtil.get('mapa');
 
