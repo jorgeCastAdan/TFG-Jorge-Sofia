@@ -18,6 +18,11 @@ export const registradoGuard: CanActivateFn =  () => {
     return true;
   }
   
-  router.navigate(['/login'])
+  try{
+    window.location.href = '/login'
+  }
+  catch(error){
+
+  }
   return false;
 }

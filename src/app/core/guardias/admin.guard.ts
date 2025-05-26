@@ -19,7 +19,12 @@ export const adminGuard: CanActivateFn = () => {
       if (usuario?.esAdmin) {
         return true;
       } else {
-        router.navigate(['/']);
+        try {
+          window.location.href = '/'
+        }
+        catch (error) {
+
+        }
         return false;
       }
 
