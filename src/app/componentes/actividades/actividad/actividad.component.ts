@@ -62,7 +62,7 @@ export class ActividadComponent {
         this.actServicio.postActividad(this.actividad).subscribe()
 
         this.toast.open('¡Participación confirmada!', 'Cerrar', { duration: 1500, horizontalPosition: 'center', verticalPosition: 'bottom' })
-        this.router.navigate(['/actividades'])
+        window.location.href = '/actividades'
       }
     })
   }
@@ -88,7 +88,7 @@ export class ActividadComponent {
         this.actServicio.postActividad(this.actividad).subscribe()
 
         this.toast.open('Participación cancelada', 'Cerrar', { duration: 1500, horizontalPosition: 'center', verticalPosition: 'bottom' })
-        this.router.navigate(['/actividades'])
+        window.location.href = '/actividades'
       }
     })
   }
