@@ -1,35 +1,31 @@
+<h1>Asociación cultural Santanica</h1>
 @if(informacion){
-    <swiper-container
-        class="swiper"
-        id="swiper"
-        [pagination]="{ clickable: true, dynamicBullets : true }"
-        navigation="true"
-        loop="true"
-        [spaceBetween]="20"
-    >
+    <swiper-container class="swiper" id="swiper" [pagination]="{ clickable: true, dynamicBullets : true }" navigation="true"
+        loop="true" [spaceBetween]="20">
         <ng-container *ngFor="let item of informacion">
             <swiper-slide>
                 <div class="contenido-slide">
-                    <img src="{{`imagenes/${item.imagen}`}}" (click)="mostrarItem(item.titulo)">
+                    <img src="{{`imagenes/${item.imagen}`}}" (click)="mostrarItem(item.titulo)" class="imgSlider">
                     <h2 class="texto-slide">{{item.titulo}}</h2>
                 </div>
             </swiper-slide>
         </ng-container>
     </swiper-container>
 
-    <div clas="informacion">
-        <ng-container *ngFor="let item of informacion">
-            <mat-card id="{{item.titulo}}">
-                <mat-card-header>
-                    <mat-card-title>{{item.titulo}}</mat-card-title>
-                </mat-card-header>
-                <img mat-card-image src="{{`imagenes/${item.imagen}`}}" class="imgItem">
-                <mat-card-content>
+    <hr>
+
+    <div class="infoV2">
+        <ng-container *ngFor="let info of informacion; let i = index">
+            <div id="{{info.titulo}}" [ngClass]="i % 2 === 0 ? 'infoIzq' : 'infoDer'">
+                <h2>{{info.titulo}}</h2>
+                <div class="contenido-info">
                     <p>
-                        {{item.descripcion}}
+                        <img src="{{`imagenes/${info.imagen}`}}" class="imgItem">
+                        {{info.descripcion}}
                     </p>
-                </mat-card-content>
-            </mat-card>
+                </div>
+                <hr>
+            </div>
         </ng-container>
     </div>
 }
