@@ -147,7 +147,7 @@ export class MapaComponent implements AfterViewInit {
 
     if (this.marcadores !== undefined) {
       this.marcadores.forEach(marcador => {
-        L.marker([marcador.latitud, marcador.longitud])
+        L.marker([marcador.latitud, marcador.longitud], {icon: L.icon({iconUrl : 'marcador.png', iconSize : [32,32], iconAnchor: [16, 32]})})
           .addTo(this.mapa)
           .on('click', () => {
             this.pulsarMarcador.emit(marcador.lugar)
