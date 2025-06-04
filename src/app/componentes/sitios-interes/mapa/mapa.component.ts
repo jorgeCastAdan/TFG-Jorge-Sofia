@@ -121,7 +121,6 @@ export class MapaComponent implements AfterViewInit {
    * @param L El resultado del import de leaflet mediante un servicio
    */
   inicializarMapa(L: any) {
-    console.log('hola')
     const mapContainer = L.DomUtil.get('mapa');
 
     if (mapContainer && mapContainer['_leaflet_id']) {

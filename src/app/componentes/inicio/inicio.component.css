@@ -70,6 +70,7 @@ hr {
 
 .contenido-info p {
     font-size: 1.3rem;
+    text-align: justify;
     color: #333;
     white-space: pre-line;
 }
