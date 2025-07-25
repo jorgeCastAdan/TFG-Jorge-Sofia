@@ -30,7 +30,7 @@ export class AsociadosComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   asociados!: Usuario[];
-  displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'dni', 'email', 'calle', 'esAdmin', 'pagado'];
+  displayedColumns: string[] = ['acciones', 'nombre', 'apellidos', 'telefono', 'fechaNac', 'dni', 'email', 'calle', 'esAdmin', 'pagado'];
 
   ngAfterViewInit() {
     this.recuperarUsuarios();
@@ -87,6 +87,7 @@ export class AsociadosComponent implements AfterViewInit {
       Nombre: a.nombre,
       Apellidos: a.apellidos,
       DNI: a.dni,
+      FechaNAc: a.fechaNac,
       Teléfono: a.telefono,
       Dirección: a.calle,
       Admin: a.esAdmin,

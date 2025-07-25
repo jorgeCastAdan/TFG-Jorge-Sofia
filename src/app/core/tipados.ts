@@ -1,4 +1,5 @@
 export type Usuario = {
+  fechaNac: string,
   nombre: string,
   apellidos: string,
   telefono: string,
