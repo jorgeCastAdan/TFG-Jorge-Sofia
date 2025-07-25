@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actividad } from '../tipados';
+import { UUID } from 'node:crypto';
 
 const BASE_URL = 'actividades'
 
@@ -38,6 +39,10 @@ export class ActividadesService {
    */
   postActividad(body: any) {
     return this.http.post(`${BASE_URL}/nuevo`, body)
+  }
+
+  putActividad(id: UUID, body:any){
+    return this.http.put(`${BASE_URL}/modificar_actividad/${id}`, body)
   }
 
   /**

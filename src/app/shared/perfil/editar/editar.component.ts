@@ -63,7 +63,7 @@ export class EditarComponent {
       dni:form.value.dni
     }
 
-    this.usuarioService.postUsuario(usuario).subscribe()
+    this.usuarioService.putUsuario(usuario.email!, usuario).subscribe()
     this.auth.setUsuario(usuario);
     window.location.href = '/'
   }

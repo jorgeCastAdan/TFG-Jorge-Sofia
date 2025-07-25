@@ -30,6 +30,14 @@
                 valor</mat-error>
         </mat-form-field>
 
+
+        <mat-form-field>
+            <mat-label>Fecha de nacimiento</mat-label>
+            <input matInput formControlName="fechaNac" required>
+            <mat-error *ngIf="usuarioForm.get('fechaNac')?.hasError('required')">Tienes que introducir un valor</mat-error>
+        </mat-form-field>
+
+
         <mat-form-field>
             <mat-label>Teléfono</mat-label>
             <input matInput formControlName="telefono" required>

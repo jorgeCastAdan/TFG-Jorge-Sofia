@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { DatePipe, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -16,6 +16,7 @@ type UsuarioForm = FormGroup<{
   dni: FormControl<string | null>;
   direccion: FormControl<string | null>;
   contraseña: FormControl<string | null>;
+  fechaNac: FormControl<string | null>;
 }>
 
 /**
@@ -25,6 +26,7 @@ type UsuarioForm = FormGroup<{
   selector: 'app-registrarse',
   standalone:true,
   imports: [NgIf, ReactiveFormsModule, MatFormFieldModule, MatInputModule, RouterLink, MatIconModule],
+  providers: [DatePipe],
   templateUrl: './registrarse.component.html',
   styleUrl: './registrarse.component.css'
 })
@@ -34,7 +36,7 @@ export class RegistrarseComponent {
  hide: boolean = true;
  usuarioExistente = false;
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private auth: AuthService){
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private auth: AuthService, private datePipe: DatePipe){
     this.usuario = this.fb.group({
       contraseña: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -42,7 +44,8 @@ export class RegistrarseComponent {
       direccion: ['', Validators.required],
       dni: ['', Validators.required],
       telefono: ['', Validators.required],
-      correo: ['', [Validators.required, Validators.email]]
+      correo: ['', [Validators.required, Validators.email]],
+      fechaNac: ['', Validators.required]
     })
   }
 
@@ -68,6 +71,7 @@ export class RegistrarseComponent {
           email:form.value.correo,
           contrasena:form.value.contraseña,
           telefono:form.value.telefono,
+          fechaNac:form.value.fechaNac
         }
 
         this.usuarioService.postUsuario(us).subscribe()

@@ -32,6 +32,10 @@ export class UsuarioService {
     return this.http.post(`${BASE_URL}/nuevo`, body)
   }
 
+  putUsuario(email:string, body:any){
+    return this.http.put(`${BASE_URL}/modificar_usuario/${email}`, body)
+  }
+
   /**
    * Llamada a la api para recuperar todos los usuarios
    * @returns Observable con la respuesta de la api

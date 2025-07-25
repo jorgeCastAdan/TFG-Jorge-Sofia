@@ -36,6 +36,7 @@ export class CrearRegistroComponent {
         email: [{ value: this.data.email, disabled: true }, [Validators.required, Validators.email]],
         direccion: [this.data.calle, Validators.required],
         contraseña: [this.data.contrasena, Validators.required],
+        fechaNac:[this.data.fechaNac, Validators.required],
         esAdmin: [this.data.esAdmin],
         pagado: [this.data.pagado]
       });
@@ -49,6 +50,7 @@ export class CrearRegistroComponent {
         email: ['', [Validators.required, Validators.email]],
         direccion: ['', Validators.required],
         contraseña: ['', [Validators.required]],
+        fechaNac:['', Validators.required],
         esAdmin: [''],
         pagado: ['']
       });
@@ -67,6 +69,7 @@ export class CrearRegistroComponent {
       apellidos: form.value.apellidos,
       calle: form.value.direccion,
       contrasena: form.value.contraseña,
+      fechaNac: form.value.fechaNac,
       telefono: form.value.telefono,
       dni: form.value.dni,
       esAdmin: form.value.esAdmin,
@@ -83,7 +86,7 @@ export class CrearRegistroComponent {
 
     if (usuario.email == undefined) {
       usuario.email = this.data.email;
-      this.usService.postUsuario(usuario).subscribe();
+      this.usService.putUsuario(usuario.email, usuario).subscribe();
       this.dialogRef.close(this.usuarioForm.value);
     }
     else {
